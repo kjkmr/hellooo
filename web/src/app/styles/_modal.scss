@@ -1,0 +1,310 @@
+@use "./config.scss" as config;
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0;
+  &.open {
+    pointer-events: visible;
+    opacity: 1;
+  }
+}
+
+.modal__bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: all 0.25s 0s ease-in-out;
+  .open & {
+    transition: all 0.2s 0s ease-out;
+    opacity: 1;
+  }
+}
+
+.modal__wrapper {
+  background-color: #fff;
+  width: 800px;
+  height: 420px;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 4px solid #000;
+  padding: 20px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.25s 0s ease-in-out;
+  .open & {
+    transition: all 0.2s 0.15s ease-out;
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.modal__nav {
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    li {
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        margin-left: 240px;
+        margin-top: 35px;
+        width: 16px;
+        height: 1px;
+        border-bottom: 1px solid #e5e5e5;
+      }
+      &:last-child {
+        &::before {
+          display: none;
+        }
+      }
+      a {
+        width: 240px;
+        height: 70px;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        padding: 20px 30px;
+        border-radius: 10px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        display: block;
+        display: flex;
+        align-items: left;
+        transition: all 0.25s ease-in;
+        cursor: pointer;
+        &:hover {
+          transition: all 0.175s ease-out;
+          background-color: #f2f2f2;
+          border-color: #f2f2f2;
+        }
+      }
+      span {
+        &::before {
+          content: "";
+          position: absolute;
+          display: block;
+          width: 30px;
+          height: 30px;
+          border: 2px solid #000;
+          border-radius: 15px;
+        }
+        display: block;
+        width: 30px;
+        height: 30px;
+        background-color: #fff;
+        border-radius: 15px;
+        text-align: center;
+        margin-right: 15px;
+      }
+      &.active {
+        a {
+          background-color: #f2f2f2;
+          border-color: #f2f2f2;
+        }
+        span {
+          &::before {
+            border-color: #000;
+          }
+          color: #fff;
+          background-color: #000;
+        }
+      }
+      &.done {
+        span {
+          &::before {
+            border-color: #fd5100;
+          }
+          text-indent: -9999px;
+          border-color: #fd5100;
+          background-image: url("/images/done-icon.svg");
+        }
+      }
+      &.done.active {
+        span {
+          background-color: #fd5100;
+          background-image: url("/images/done-icon-active.svg");
+        }
+      }
+    }
+  }
+}
+
+.modal__text {
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  line-height: 1.75;
+}
+
+.modal__link {
+  color: #fd5100;
+  text-decoration: underline;
+  &:hover {
+    color: #666;
+  }
+}
+
+.modal__button {
+  background-color: #fd5100;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+}
+
+/**
+ * Step 1
+ */
+.modal__step1 {
+  display: flex;
+  gap: 40px;
+  margin-top: 100px;
+  justify-content: center;
+  align-items: center;
+  p {
+    width: 360px;
+  }
+}
+
+/**
+ * Step 2
+ */
+.modal__step2 {
+  padding-top: 20px;
+  .modal__text {
+    text-align: center;
+  }
+  &__list {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+  }
+  .modal__button {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+.template-list {
+  width: 480px;
+  max-height: 240px;
+  overflow: hidden;
+  overflow-y: scroll;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  &__option {
+    cursor: pointer;
+    border-radius: 10px;
+    &:hover {
+      background-color: #e5e5e5;
+      // .template-list__icon::before {
+      //   content: "";
+      //   display: block;
+      //   position: absolute;
+      //   width: 60px;
+      //   height: 60px;
+      //   border: 4px solid #fd5100;
+      // }
+    }
+  }
+  &__inner {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin: 0px 60px 0px 20px;
+    padding: 15px 0px;
+    height: 90px;
+
+    .open & {
+      border-radius: 0px;
+      border-bottom: 1px solid #e5e5e5;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  &__icon {
+    width: 60px;
+    height: 60px;
+    // margin-top: 15px;
+    margin-left: 5px;
+  }
+  &__model {
+    text-align: left;
+    font-size: 18px;
+  }
+  &__note-selected {
+    padding-left: 10px;
+    text-align: left;
+    font-size: 16px;
+  }
+  &__spec {
+    font-size: 75%;
+    color: #666;
+  }
+  &__link {
+    text-align: left;
+    font-size: 75%;
+    a {
+      color: #666;
+    }
+  }
+  a {
+    &:hover {
+      text-decoration: underline;
+      color: #fd5100;
+    }
+  }
+}
+
+/**
+ * Step 3
+ */
+
+.modal__step3 {
+  padding: 0 20px;
+  display: flex;
+  gap: 20px;
+  textarea {
+    display: block;
+    border-radius: 10px;
+    width: 440px;
+    height: 240px;
+    padding: 15px;
+    font-size: 14px;
+    background-color: #f5f5f5;
+    &:focus {
+      outline: 2px solid #fd5100;
+    }
+    &::selection {
+      background-color: #fd5100;
+      color: #fff;
+    }
+  }
+  > div {
+    width: 240px;
+    .modal__text {
+      margin-bottom: 20px;
+    }
+  }
+  .modal__button {
+    width: 240px;
+    height: 70px;
+  }
+}

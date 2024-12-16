@@ -1,0 +1,154 @@
+@use "./config.scss" as config;
+
+.main__wrapper {
+  padding: config.vunitPc(35vw) config.vunitPc(40vw) 0;
+}
+
+.main__chrome-message {
+  position: absolute;
+  padding: 0 40px;
+  top: calc(50% + 195px);
+  pointer-events: all;
+  color: #fd5100;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateX(-20px);
+  .ready & {
+    transition:
+      transform 0.75s 1.6s cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 0.25s 1.6s ease-out;
+    transform: translateX(0px);
+    opacity: 1;
+  }
+  a {
+    color: #fd5100;
+    text-decoration: underline;
+    &:hover {
+      color: #666;
+    }
+  }
+}
+
+.main__sp-message {
+  position: absolute;
+  color: #fd5100;
+  font-weight: 600;
+  top: calc(50% + 22vw);
+  opacity: 0;
+  transform: translateX(-20px);
+  .ready & {
+    transition:
+      transform 0.75s 1.6s cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 0.25s 1.6s ease-out;
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+.main__credit {
+  position: fixed;
+  bottom: 20px;
+  padding: 0 40px;
+  font-size: x-small;
+  color: #333;
+  opacity: 0.5;
+  a {
+    color: #fd5100;
+    &:hover {
+      color: #666;
+      text-decoration: underline;
+    }
+  }
+}
+
+.button {
+  opacity: 0;
+  transform: translateX(-20px);
+  .ready & {
+    transition:
+      transform 0.75s 1.6s cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 0.25s 1.6s ease-out;
+    transform: translateX(0px);
+    opacity: 1;
+  }
+  position: fixed;
+  left: 40px;
+  top: calc(50% + 165px);
+  display: inline-block;
+
+  background-color: #fd5100;
+  color: #fff;
+  // color: #fd5100;
+  // border: 4px solid #fd5100;
+  // background-color: #fff;
+  border-radius: 20px;
+  transition: background-color 0.3s;
+  width: 480px;
+  padding: 15px 15px;
+  cursor: pointer;
+  &:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 40px;
+    transform: translateY(-50%);
+    background-image: url("/arrow.svg");
+    background-size: cover;
+    width: config.vunitPc(32vw);
+    height: config.vunitPc(15vw);
+    transition: all 0.25s ease-out;
+  }
+  &:hover {
+    background-color: #000;
+    &:after {
+      transform: translateX(5px) translateY(-50%);
+    }
+  }
+}
+
+.button__text {
+  font-size: 22px;
+  padding: 10px 20px;
+  font-weight: 600;
+  text-align: left;
+}
+
+//--------------------------------------------------
+// drop-area
+//--------------------------------------------------
+#drop-area {
+  position: absolute;
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    pointer-events: none;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    transition: border 0.2s ease-out;
+  }
+  &.dragover {
+    &:after {
+      border: 10px solid #fd5100;
+    }
+  }
+}
+
+//--------------------------------------------------
+// bg
+//--------------------------------------------------
+canvas.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
