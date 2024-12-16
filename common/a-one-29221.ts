@@ -6,7 +6,7 @@ export const a_one_29221 = {
 	modelNumber: '29221',
 	url: 'https://www.a-one.co.jp/product/search/detail.php?id=29221',
 	amazonUrl: 'https://amzn.asia/d/aEJrBYb',
-	iconImage: 'a-one-29221.png',
+	iconImage: 'a-one-29221.png.webp',
 	page: {
 		width: 210,
 		height: 297,

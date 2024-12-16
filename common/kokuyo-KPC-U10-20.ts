@@ -6,7 +6,7 @@ export const kokuyo_KPC_U10_20 = {
 	modelNumber: 'KPC-U10-20',
 	url: 'https://www.kokuyo-st.co.jp/search/1_detail.php?seihin_sikibetu=1&ss1=13&ss2=13B1&sid=100123785&pgmax=80',
 	amazonUrl: 'https://amzn.asia/d/3QdadJF',
-	iconImage: 'kokuyo-KPC-U10-20.png',
+	iconImage: 'kokuyo-KPC-U10-20.png.webp',
 	page: {
 		width: 210,
 		height: 297,

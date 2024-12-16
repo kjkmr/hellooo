@@ -6,7 +6,7 @@ export const a_one_72110 = {
 	modelNumber: '72110',
 	url: 'https://www.a-one.co.jp/product/search/detail.php?id=72110',
 	amazonUrl: 'https://amzn.asia/d/9Zx0dw4',
-	iconImage: 'a-one-72110.png',
+	iconImage: 'a-one-72110.png.webp',
 	page: {
 		width: 210,
 		height: 297,

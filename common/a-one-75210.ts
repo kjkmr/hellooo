@@ -6,7 +6,7 @@ export const a_one_75210 = {
 	modelNumber: '75210',
 	url: 'https://www.a-one.co.jp/product/search/detail.php?id=75210',
 	amazonUrl: 'https://amzn.asia/d/gDKdDWN',
-	iconImage: 'a-one-75210.png',
+	iconImage: 'a-one-75210.png.webp',
 	page: {
 		width: 210,
 		height: 297,

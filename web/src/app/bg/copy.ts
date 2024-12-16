@@ -25,17 +25,17 @@ export class Copy extends Container {
   button?: FlipSpriteButton;
 
   async load() {
-    const l1 = await Assets.load("/images/copy-connect.png");
-    const l2 = await Assets.load("/images/copy-everyone.png");
-    const l3 = await Assets.load("/images/copy-icon.png");
-    const l4 = await Assets.load("/images/copy-small.png");
-    const t1 = await Assets.load("/images/copy-thankyou1.png");
-    const t2 = await Assets.load("/images/copy-thankyou2.png");
-    const t3 = await Assets.load("/images/copy-thankyou3.png");
-    const t4 = await Assets.load("/images/copy-thankyou4.png");
-    const b = await Assets.load("/images/create-button-bg.png");
-    const bh = await Assets.load("/images/create-button-text.png");
-    const ba = await Assets.load("/images/create-button-arrow.png");
+    const l1 = await Assets.load("/images/copy-connect.png.webp");
+    const l2 = await Assets.load("/images/copy-everyone.png.webp");
+    const l3 = await Assets.load("/images/copy-icon.png.webp");
+    const l4 = await Assets.load("/images/copy-small.png.webp");
+    const t1 = await Assets.load("/images/copy-thankyou1.png.webp");
+    const t2 = await Assets.load("/images/copy-thankyou2.png.webp");
+    const t3 = await Assets.load("/images/copy-thankyou3.png.webp");
+    const t4 = await Assets.load("/images/copy-thankyou4.png.webp");
+    const b = await Assets.load("/images/create-button-bg.png.webp");
+    const bh = await Assets.load("/images/create-button-text.png.webp");
+    const ba = await Assets.load("/images/create-button-arrow.png.webp");
     this.line1 = new FlipSprite(l1, 96);
     this.line2 = new FlipSprite(l2, 96);
     this.line3 = new FlipSprite(l3, 96);

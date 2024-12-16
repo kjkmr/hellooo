@@ -6,7 +6,7 @@ export const a_one_31514 = {
 	modelNumber: '31514',
 	url: 'https://www.a-one.co.jp/product/search/detail.php?id=31514',
 	amazonUrl: 'https://amzn.asia/d/3cqZoRW',
-	iconImage: 'a-one-31514.png',
+	iconImage: 'a-one-31514.png.webp',
 	page: {
 		width: 210,
 		height: 297,

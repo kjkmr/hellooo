@@ -6,7 +6,7 @@ export const kokuyo_KPC_E1121_20N = {
 	modelNumber: 'KPC-E1121-20N',
 	url: 'https://www.kokuyo-st.co.jp/search/label_detail.php?seihin_sikibetu=&ss1=13&ss2=13B1&sid=100122179',
 	amazonUrl: 'https://amzn.asia/d/3GqP2HA',
-	iconImage: 'kokuyo-KPC-E1121-20N.png',
+	iconImage: 'kokuyo-KPC-E1121-20N.png.webp',
 	page: {
 		width: 210,
 		height: 297,
