@@ -30,6 +30,7 @@ const ease = (i: number) => {
 export default class Card extends Container {
   container: Container = new Container();
 
+  data: Icon | null;
   transparentBg: CardBg = new CardBg();
   bg: CardBg = new CardBg();
   backSide: FlipBackSide = new FlipBackSide(new CardBg("orange"));
@@ -50,6 +51,7 @@ export default class Card extends Container {
    */
   constructor(icon: Icon | null, iconTexture: Texture, qrTexture: Texture) {
     super();
+    this.data = icon;
     this.icon = new CardSprite(25, 20, iconTexture);
     this.qr = new CardSprite(25, 105, qrTexture);
     this.transparentBg.alpha = 0;
@@ -70,16 +72,24 @@ export default class Card extends Container {
     this.addChild(this.backSide);
     this.visible = false;
     this.interactive = true;
+    this.cursor = "pointer";
     this.flipAngle = this._flipAngle;
     this.flipPosition = this._flipPosition;
     this.on("mouseover", this.onMouseOver);
     this.on("mouseout", this.onMouseOut);
+    this.on("click", this.onClick);
   }
 
   /**
    * マウスイベント
    * @param e
    */
+
+  onClick = (e: FederatedPointerEvent) => {
+    this.data?.url &&
+      window.open(`https://x.com/${this.data.account}`, "_blank");
+  };
+
   onMouseOver = (e: FederatedPointerEvent) => {
     if (this._mouseOutTimer) window.clearTimeout(this._mouseOutTimer);
     this.on("mousemove", this.onMouseMove);

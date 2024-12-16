@@ -58,6 +58,7 @@ export default class FlipSprite extends Container {
     this.addChild(this.container);
     this.addChild(this.backSide);
     this.visible = false;
+    this.backSide.visible = false;
     this.flipAngle = this._flipAngle;
     this.flipPosition = this._flipPosition;
     this.interactive = true;
@@ -188,17 +189,21 @@ export default class FlipSprite extends Container {
    */
   show(delay: number, duration: number = 1.25) {
     return new Promise((resolve) => {
-      // this.visible = true;
       this.flipPosition = 0.001;
       this.flipAngle = Math.PI * -0.9999;
+      this.visible = false;
+      this.backSide.visible = false;
       gsap.to(this, {
-        visible: true,
         flipPosition: 1,
         flipAngle: Math.PI * -0.75,
         duration: duration,
         delay: delay,
         ease: ease,
         overwrite: true,
+        onStart: () => {
+          this.backSide.visible = true;
+          this.visible = true;
+        },
         onComplete: resolve,
       });
       // gsap.to(this, {
