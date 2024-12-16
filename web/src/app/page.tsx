@@ -19,11 +19,9 @@ export default function Home() {
 
   // 初期化
   useEffect(() => {
-    console.log(Bg);
     setSpLayout(isSpLayout());
     setPcChrome(isPcChrome());
     Bg.init();
-    console.log(Bg.getInstance());
     Bg.getInstance().on("create-button-click", openModal);
     return () => {
       Bg.getInstance().removeAllListeners("create-button-click");

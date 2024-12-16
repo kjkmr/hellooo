@@ -18,7 +18,6 @@ export default function TemplateList(props: TemplateListProps) {
   // テンプレート選択時にChrome拡張機能側に通知
   useEffect(() => {
     props.onSelect(selectedTemplateId);
-    // window.postMessage({ type: "selectTemplate", selectedTemplateId }, "*");
   }, [selectedTemplateId]);
 
   const onSelect = (id: string) => {

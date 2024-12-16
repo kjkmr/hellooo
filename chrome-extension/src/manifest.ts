@@ -19,6 +19,7 @@ const manifest = defineManifest(async (env) => ({
 				'*://x.com/*',
 				'*://twitter.com/*',
 				'*://hellooo.cards/*',
+				'*://www.hellooo.cards/*',
 				'*://cards-rose-nu.vercel.app/*',
 				'*://localhost:*/*',
 				'*://localhost/*',
@@ -27,7 +28,7 @@ const manifest = defineManifest(async (env) => ({
 			js: ['content/index.ts'],
 		},
 	],
-	host_permissions: ['*://x.com/*', '*://twitter.com/*', '*://hellooo.cards/*'],
+	host_permissions: ['*://x.com/*', '*://twitter.com/*'],
 	options_ui: {},
 	web_accessible_resources: [
 		{

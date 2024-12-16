@@ -27,16 +27,21 @@ export default function Modal(props: ModalProps) {
     }
   }, [isOpen, step]);
 
-  // 拡張機能がインストールされているかチェック
-  useEffect(() => {
-    setIsExtensionInstalled(
-      window.document.documentElement.classList.contains("hellooo-installed"),
-    );
-  }, []);
-
   // インストール済みの場合はステップ2に進む
   useEffect(() => {
-    if (isExtensionInstalled && step == 1) setStep(2);
+    // 拡張機能がインストールされているかチェック
+    const checkIsExtensionInstalled = () => {
+      return window.document.documentElement.classList.contains(
+        "hellooo-installed",
+      );
+    };
+    setIsExtensionInstalled(checkIsExtensionInstalled());
+
+    window.postMessage({
+      type: isOpen ? "modalOpen" : "modalClose",
+      selectedTemplateId: templateId,
+    });
+    if (checkIsExtensionInstalled() && step == 1) setStep(2);
   }, [isOpen]);
 
   // テキストエリアの設定

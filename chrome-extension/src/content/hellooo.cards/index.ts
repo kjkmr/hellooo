@@ -9,12 +9,11 @@ export default class App {
 	#selectedTemplate: LabelTemplate | undefined = undefined;
 
 	constructor() {
-		window.addEventListener('load', () => {
-			document.documentElement.classList.add('hellooo-installed');
-		});
+		document.documentElement.classList.add('hellooo-installed');
 		this.#pdf = new Pdf();
 		//
 		window.addEventListener('message', (event: MessageEvent) => {
+			document.documentElement.classList.add('hellooo-installed');
 			if (event.data.type == 'selectTemplate' && event.data.selectedTemplateId) {
 				this.#selectedTemplate = Templates.getById(event.data.selectedTemplateId);
 			}

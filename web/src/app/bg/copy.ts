@@ -61,7 +61,6 @@ export class Copy extends Container {
     this.button = new FlipSpriteButton(b, bh, ba);
     this.button.position.set(0, 400);
     this.button.on("mousedown", () => {
-      console.log("create-button-click");
       this.emit("create-button-click");
     });
     if (isPcChrome()) this.addChild(this.button);
