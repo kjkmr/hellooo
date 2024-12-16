@@ -28,7 +28,10 @@ export default function Home() {
       Bg.getInstance().removeAllListeners("create-button-click");
     };
   }, []);
+
+  // モーダル開閉時に背景のインタラクションを切り替え
   useEffect(() => {
+    if (window !== undefined) return;
     Bg.getInstance().setInteractive(!isModalOpen);
   }, [isModalOpen]);
 
