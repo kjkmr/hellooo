@@ -9,7 +9,6 @@ import { Bg } from "@/bg";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const dropAreaRef = useRef<HTMLElement>(null);
   const [step, setStep] = useState(1);
   const [spLayout, setSpLayout] = useState(false);
   const [pcChrome, setPcChrome] = useState(false);
@@ -32,48 +31,6 @@ export default function Home() {
   useEffect(() => {
     Bg.getInstance().setInteractive(!isModalOpen);
   }, [isModalOpen]);
-
-  // ドラッグ&ドロップ初期化
-  useEffect(() => {
-    const dropArea = dropAreaRef.current;
-    if (!dropArea) return;
-
-    const onDragOver = (event: DragEvent) => {
-      // event.preventDefault();
-      dropArea.classList.add("dragover");
-    };
-
-    const onDragLeave = (event: DragEvent) => {
-      dropArea.classList.remove("dragover");
-    };
-
-    const onDrop = async (event: DragEvent) => {
-      dropArea.classList.remove("dragover");
-      event.preventDefault();
-      if (!event.dataTransfer) {
-        alert(
-          "Xのアカウントリストのテキストファイルをドラッグ＆ドロップしてください。",
-        );
-        return;
-      }
-      // アカウントリスト取得
-      const accountLists = await getAccountLists(event.dataTransfer.items);
-      setAccountText(accountLists.join("\n"));
-      setStep(3);
-      setIsModalOpen(true);
-    };
-
-    dropArea.addEventListener("drop", onDrop, false);
-    dropArea.addEventListener("dragover", onDragOver, false);
-    dropArea.addEventListener("dragend", onDragLeave);
-    dropArea.addEventListener("dragleave", onDragLeave);
-    return () => {
-      dropArea.removeEventListener("drop", onDrop);
-      dropArea.removeEventListener("dragover", onDragOver);
-      dropArea.removeEventListener("dragend", onDragLeave);
-      dropArea.removeEventListener("dragleave", onDragLeave);
-    };
-  }, [dropAreaRef.current]);
 
   // window.postMessageを受け取って、モーダルを開く
   useEffect(() => {
@@ -106,7 +63,7 @@ export default function Home() {
 
   return (
     <>
-      <main id="drop-area" ref={dropAreaRef}>
+      <main id="drop-area">
         <div className="main__wrapper">
           <div className="main__logo">
             <svg
@@ -191,6 +148,7 @@ export default function Home() {
       </p>
       <Modal
         isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
         onClose={closeModal}
         step={step}
         setStep={setStep}

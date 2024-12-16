@@ -21,10 +21,7 @@ const manifest = defineManifest(async (env) => ({
 				'*://hellooo.cards/*',
 				'*://www.hellooo.cards/*',
 				'*://cards-rose-nu.vercel.app/*',
-				'*://localhost:*/*',
-				'*://localhost/*',
-			],
-			// matches: ['http://*/*', 'https://*/*', 'file:///*'],
+			].concat(env.mode === 'development' ? ['*://*/*'] : []),
 			js: ['content/index.ts'],
 		},
 	],
@@ -51,7 +48,7 @@ const manifest = defineManifest(async (env) => ({
 		'48': 'images/extension_48.png',
 		'128': 'images/extension_128.png',
 	},
-	permissions: ['storage', 'tabs', 'activeTab', 'scripting'],
+	permissions: ['tabs', 'activeTab', 'scripting'],
 }));
 
 export default manifest;

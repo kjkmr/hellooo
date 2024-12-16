@@ -3,9 +3,11 @@
 import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 import TemplateList from "./templateList";
 import "@/styles/_modal.scss";
+import { getAccountLists } from "./utils";
 
 interface ModalProps {
   isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
   accountText: string;
   setAccountText: (text: string) => void;
   step: number;
@@ -14,10 +16,61 @@ interface ModalProps {
 }
 
 export default function Modal(props: ModalProps) {
-  const { isOpen, accountText, setAccountText, onClose, step, setStep } = props;
+  const {
+    isOpen,
+    setIsOpen,
+    accountText,
+    setAccountText,
+    onClose,
+    step,
+    setStep,
+  } = props;
   const [templateId, setTemplateId] = useState<string | null>("");
   const [isExtensionInstalled, setIsExtensionInstalled] = useState(false);
+  const dropAreaRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // ドラッグ&ドロップ初期化
+  useEffect(() => {
+    const dropArea = dropAreaRef.current;
+    if (!dropArea) return;
+
+    const onDragOver = (event: DragEvent) => {
+      event.preventDefault();
+      dropArea.classList.add("dragover");
+    };
+
+    const onDragLeave = (event: DragEvent) => {
+      dropArea.classList.remove("dragover");
+    };
+
+    const onDrop = async (event: DragEvent) => {
+      dropArea.classList.remove("dragover");
+      event.preventDefault();
+      if (!event.dataTransfer) {
+        alert(
+          "Xのアカウントリストのテキストファイルをドラッグ＆ドロップしてください。",
+        );
+        return;
+      }
+      // アカウントリスト取得
+      const accountLists = await getAccountLists(event.dataTransfer.items);
+      setAccountText(accountLists.join("\n"));
+      setStep(3);
+      setIsOpen(true);
+    };
+
+    dropArea.addEventListener("drop", onDrop, false);
+    dropArea.addEventListener("dragover", onDragOver, false);
+    dropArea.addEventListener("dragend", onDragLeave);
+    dropArea.addEventListener("dragleave", onDragLeave);
+    return () => {
+      dropArea.removeEventListener("drop", onDrop);
+      dropArea.removeEventListener("dragover", onDragOver);
+      dropArea.removeEventListener("dragend", onDragLeave);
+      dropArea.removeEventListener("dragleave", onDragLeave);
+    };
+  }, [dropAreaRef.current]);
 
   // ステップ3の時にテキストエリアにフォーカス
   useEffect(() => {
@@ -208,7 +261,7 @@ export default function Modal(props: ModalProps) {
 
   return (
     <>
-      <div className={`modal ${isOpen ? "open" : ""}`}>
+      <div ref={dropAreaRef} className={`modal ${isOpen ? "open" : ""}`}>
         <div className="modal__bg" onClick={onClose}></div>
         <div className="modal__wrapper">
           {stepNav()}

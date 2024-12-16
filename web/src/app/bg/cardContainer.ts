@@ -26,7 +26,7 @@ export default class CardContainer extends Container {
   }
 
   async load() {
-    this.iconTexture = await Assets.load("/images/icon.jpg");
+    this.iconTexture = await Assets.load("/images/twitter-icon.png");
     this.qrTexture = await Assets.load("/images/qr.png");
     this.addChild(this.container);
   }

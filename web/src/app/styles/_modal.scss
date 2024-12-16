@@ -15,6 +15,23 @@
     pointer-events: visible;
     opacity: 1;
   }
+  // drag
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    pointer-events: none;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    transition: border 0.2s ease-out;
+  }
+  &.dragover {
+    &:after {
+      border: 10px solid #fd5100;
+    }
+  }
 }
 
 .modal__bg {
