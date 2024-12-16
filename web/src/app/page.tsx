@@ -5,8 +5,7 @@ import Modal from "@/components/Modal";
 import "@/styles/_base.scss";
 import "@/styles/_main.scss";
 import { getAccountLists, isPcChrome, isSpLayout } from "./components/utils";
-
-const bg = require("@/bg");
+import { Bg } from "@/bg";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,14 +22,14 @@ export default function Home() {
     setSpLayout(isSpLayout());
     setPcChrome(isPcChrome());
     if (window !== undefined) return;
-    bg.default.init();
-    bg.default.getInstance().on("create-button-click", openModal);
+    Bg.init();
+    Bg.getInstance().on("create-button-click", openModal);
     return () => {
-      bg.default.getInstance().removeAllListeners("create-button-click");
+      Bg.getInstance().removeAllListeners("create-button-click");
     };
   }, []);
   useEffect(() => {
-    bg.default.getInstance().setInteractive(!isModalOpen);
+    Bg.getInstance().setInteractive(!isModalOpen);
   }, [isModalOpen]);
 
   // ドラッグ&ドロップ初期化
@@ -89,8 +88,8 @@ export default function Home() {
       } else if (event.data.type == "endCreatePdf") {
         console.log("endCreatePdf");
         setIsModalOpen(false);
-        bg.default.getInstance().setIcons(event.data.icons);
-        bg.default.getInstance().showThanks();
+        Bg.getInstance().setIcons(event.data.icons);
+        Bg.getInstance().showThanks();
       }
     };
     if (window !== undefined) {

@@ -4,7 +4,7 @@ import { Icon } from "../../../../common/_interface";
 import { Copy } from "./copy";
 import EventEmitter from "events";
 
-export default class Bg extends EventEmitter {
+export class Bg extends EventEmitter {
   // Singleton
   static instance: Bg;
   static init() {
@@ -17,7 +17,6 @@ export default class Bg extends EventEmitter {
 
   // Instance
   app: Application;
-  // pane: Pane;
   cardContainer: CardContainer;
   copy: Copy;
 
@@ -27,9 +26,6 @@ export default class Bg extends EventEmitter {
   constructor() {
     super();
     this.app = new Application();
-    // ui
-    // this.pane = new Pane();
-
     this.cardContainer = new CardContainer();
     this.copy = new Copy();
     this.copy.on("create-button-click", () => {
