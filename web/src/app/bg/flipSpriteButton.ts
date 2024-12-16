@@ -140,6 +140,6 @@ export default class FlipSpriteButton extends FlipSprite {
         overwrite: true,
         ease: "expo.inOut",
       });
-    }, 0.5 * 1000);
+    }, 0.45 * 1000);
   }
 }

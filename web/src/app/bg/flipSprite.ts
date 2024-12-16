@@ -159,7 +159,7 @@ export default class FlipSprite extends Container {
   onMouseOut = (e: FederatedPointerEvent) => {
     this._onMouseOut();
   };
-  protected _onMouseOut(delay: number = 0.2) {
+  protected _onMouseOut(delay: number = 0.05) {
     this.off("mousemove", this.onMouseMove);
     this.off("mousedown", this.onMouseDown);
     if (this._mouseOutTimer) clearTimeout(this._mouseOutTimer);

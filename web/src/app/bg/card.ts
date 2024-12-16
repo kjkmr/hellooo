@@ -119,7 +119,7 @@ export default class Card extends Container {
         ease: ease,
         overwrite: true,
       });
-    }, 200);
+    }, 50);
   };
 
   get flipPosition() {
