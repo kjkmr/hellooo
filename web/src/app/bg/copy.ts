@@ -15,12 +15,14 @@ export class Copy extends Container {
   line3?: FlipSprite;
   line4?: FlipSprite;
   container: Container = new Container();
+  backsideContainer: Container = new Container();
 
   thanksLine1?: FlipSprite;
   thanksLine2?: FlipSprite;
   thanksLine3?: FlipSprite;
   thanksLine4?: FlipSprite;
   thanksContainer: Container = new Container();
+  thanksBacksideContainer: Container = new Container();
 
   button?: FlipSpriteButton;
 
@@ -54,10 +56,32 @@ export class Copy extends Container {
     this.container.addChild(this.line2);
     this.container.addChild(this.line3);
     this.container.addChild(this.line4);
+
+    this.line1.backSide.position.y = this.line1.position.y;
+    this.line2.backSide.position.y = this.line2.position.y;
+    this.line3.backSide.position.y = this.line3.position.y;
+    this.line4.backSide.position.y = this.line4.position.y;
+
+    this.backsideContainer.addChild(this.line1.backSide);
+    this.backsideContainer.addChild(this.line2.backSide);
+    this.backsideContainer.addChild(this.line3.backSide);
+    this.backsideContainer.addChild(this.line4.backSide);
+
     this.thanksContainer.addChild(this.thanksLine1);
     this.thanksContainer.addChild(this.thanksLine2);
     this.thanksContainer.addChild(this.thanksLine3);
     this.thanksContainer.addChild(this.thanksLine4);
+
+    this.thanksLine1.backSide.position.y = this.thanksLine1.position.y;
+    this.thanksLine2.backSide.position.y = this.thanksLine2.position.y;
+    this.thanksLine3.backSide.position.y = this.thanksLine3.position.y;
+    this.thanksLine4.backSide.position.y = this.thanksLine4.position.y;
+
+    this.thanksBacksideContainer.addChild(this.thanksLine1.backSide);
+    this.thanksBacksideContainer.addChild(this.thanksLine2.backSide);
+    this.thanksBacksideContainer.addChild(this.thanksLine3.backSide);
+    this.thanksBacksideContainer.addChild(this.thanksLine4.backSide);
+
     this.button = new FlipSpriteButton(b, bh, ba);
     this.button.position.set(0, 400);
     this.button.on("mousedown", () => {
@@ -79,6 +103,7 @@ export class Copy extends Container {
     )
       return;
     this.addChild(this.container);
+    this.addChild(this.backsideContainer);
     const delay = 0.25;
     await Promise.all([
       this.line1.show(delay),
@@ -98,7 +123,9 @@ export class Copy extends Container {
     )
       return;
     this.removeChild(this.container);
+    this.removeChild(this.backsideContainer);
     this.addChild(this.thanksContainer);
+    this.addChild(this.thanksBacksideContainer);
     const delay = 0.25;
     await Promise.all([
       this.thanksLine1.show(delay),

@@ -32,7 +32,6 @@ export default class CardContainer extends Container {
   }
   async init() {
     this.rotation = 15 * (Math.PI / 180);
-    this._onResize();
     window.addEventListener("resize", this.onResize);
   }
 
@@ -41,6 +40,7 @@ export default class CardContainer extends Container {
     iconSpriteSheet: Spritesheet,
     qrSpriteSheet: Spritesheet,
   ) {
+    this.rotation = 15 * (Math.PI / 180);
     this.icons = icons;
     if (this.iconSpriteSheet) {
       this.iconSpriteSheet.textureSource.destroy();

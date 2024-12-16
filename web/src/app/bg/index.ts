@@ -3,6 +3,7 @@ import CardContainer from "./cardContainer";
 import { Icon } from "../../../../common/_interface";
 import { Copy } from "./copy";
 import EventEmitter from "events";
+import { icons } from "./icons";
 
 export class Bg extends EventEmitter {
   // Singleton
@@ -49,6 +50,7 @@ export class Bg extends EventEmitter {
         this.app.stage.addChild(this.copy);
         document.documentElement.classList.add("ready");
         await this.copy.show();
+        this.setIcons(icons);
         this.cardContainer.init();
       });
   }

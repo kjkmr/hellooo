@@ -147,9 +147,11 @@ export default class FlipSprite extends Container {
     if (this.changeHitArea) {
       this.hitArea = new Rectangle(
         -40,
-        -h * 0.5 + y,
+        // -h * 0.5 + y,
+        -h * 0.5,
         this.sprite.width * 1.1,
-        h * 1.75 - y,
+        // h * 1.75 - y,
+        h * 1.75,
       );
     }
   };

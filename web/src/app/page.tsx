@@ -4,7 +4,12 @@ import Button from "@/components/button.tsx";
 import Modal from "@/components/Modal";
 import "@/styles/_base.scss";
 import "@/styles/_main.scss";
-import { getAccountLists, isPcChrome, isSpLayout } from "./components/utils";
+import {
+  downloadJson,
+  getAccountLists,
+  isPcChrome,
+  isSpLayout,
+} from "./components/utils";
 import { Bg } from "@/bg";
 
 export default function Home() {
@@ -46,6 +51,7 @@ export default function Home() {
       } else if (event.data.type == "endCreatePdf") {
         console.log("endCreatePdf");
         setIsModalOpen(false);
+        downloadJson(event.data.icons, "icons.json");
         Bg.getInstance().setIcons(event.data.icons);
         Bg.getInstance().showThanks();
       }
