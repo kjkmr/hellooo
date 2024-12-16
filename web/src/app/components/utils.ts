@@ -1,5 +1,5 @@
 export function isSpLayout() {
-  return window.innerWidth < 768;
+  return window !== undefined ? window.innerWidth < 768 : false;
 }
 
 export function isPcChrome() {

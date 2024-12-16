@@ -12,12 +12,17 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dropAreaRef = useRef<HTMLElement>(null);
   const [step, setStep] = useState(1);
+  const [spLayout, setSpLayout] = useState(false);
+  const [pcChrome, setPcChrome] = useState(false);
   const [accountText, setAccountText] = useState<string>(
     "@hellooo_cards\n@casestudy_info\n@kjkmr\n@WebMino",
   );
 
-  // Bg初期化
+  // 初期化
   useEffect(() => {
+    setSpLayout(isSpLayout());
+    setPcChrome(isPcChrome());
+    if (window !== undefined) return;
     bg.default.init();
     bg.default.getInstance().on("create-button-click", openModal);
     return () => {
@@ -88,10 +93,12 @@ export default function Home() {
         bg.default.getInstance().showThanks();
       }
     };
-    window.addEventListener("message", onGetMessage);
-    return () => {
-      window.removeEventListener("message", onGetMessage);
-    };
+    if (window !== undefined) {
+      window.addEventListener("message", onGetMessage);
+      return () => {
+        window.removeEventListener("message", onGetMessage);
+      };
+    }
   }, []);
 
   const openModal = () => setIsModalOpen(true);
@@ -149,11 +156,11 @@ export default function Home() {
               />
             </svg>
           </div>
-          {isSpLayout() ? (
+          {spLayout ? (
             <p className="main__sp-message">
               このサービスはPCのブラウザでご利用ください。
             </p>
-          ) : !isPcChrome() ? (
+          ) : !pcChrome ? (
             <p className="main__chrome-message">
               お使いのブラウザではこのサービスはご利用いただけません。
               <br />

@@ -16,6 +16,7 @@ interface ModalProps {
 export default function Modal(props: ModalProps) {
   const { isOpen, accountText, setAccountText, onClose, step, setStep } = props;
   const [templateId, setTemplateId] = useState<string | null>("");
+  const [isExtensionInstalled, setIsExtensionInstalled] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // ステップ3の時にテキストエリアにフォーカス
@@ -27,13 +28,15 @@ export default function Modal(props: ModalProps) {
   }, [isOpen, step]);
 
   // 拡張機能がインストールされているかチェック
-  const checkExtensionInstalled = () => {
-    return document.documentElement.classList.contains("hellooo-installed");
-  };
+  useEffect(() => {
+    setIsExtensionInstalled(
+      window.document.documentElement.classList.contains("hellooo-installed"),
+    );
+  }, []);
 
   // インストール済みの場合はステップ2に進む
   useEffect(() => {
-    if (checkExtensionInstalled() && step == 1) setStep(2);
+    if (isExtensionInstalled && step == 1) setStep(2);
   }, [isOpen]);
 
   // テキストエリアの設定
@@ -59,7 +62,7 @@ export default function Modal(props: ModalProps) {
    * 作成ボタンクリック時
    */
   const handleCreate = () => {
-    if (!checkExtensionInstalled()) {
+    if (!isExtensionInstalled) {
       alert("Chrome拡張機能がインストールされていません。");
       setStep(1);
       return;
@@ -100,7 +103,7 @@ export default function Modal(props: ModalProps) {
         <a href="" target="_blank">
           <img src="/images/extension-icon.svg" width="120" height="120" />
         </a>
-        {checkExtensionInstalled() ? (
+        {isExtensionInstalled ? (
           <p className="modal__text">Chrome拡張機能はインストール済みです。</p>
         ) : (
           <p className="modal__text">
@@ -172,7 +175,7 @@ export default function Modal(props: ModalProps) {
       <nav className="modal__nav">
         <ul>
           <li
-            className={`modal__navItem ${step === 1 ? "active" : ""} ${checkExtensionInstalled() ? "done" : ""}`}
+            className={`modal__navItem ${step === 1 ? "active" : ""} ${isExtensionInstalled ? "done" : ""}`}
           >
             <a onClick={() => setStep(1)}>
               <span>1</span>
