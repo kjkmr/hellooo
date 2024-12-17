@@ -18,9 +18,14 @@ export const kokuyo_KPC_E1121_20N = {
 	card: {
 		width: 86.4,
 		height: 42.3,
-		iconSize: 18,
-		qrSize: 18,
+		iconSize: 16,
+		qrSize: 16,
 		offsetX: 0,
 		offsetY: 0,
+		paddingLeft: 3.6,
+		paddingTop: 3.6,
+		iconMarginBottom: 3,
+		iconMarginRight: 4,
+		textHeight: 13,
 	},
 } as LabelTemplate

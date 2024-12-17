@@ -22,5 +22,7 @@ export const a_one_31514 = {
 		qrSize: 20,
 		offsetX: 0,
 		offsetY: 0,
+		paddingLeft: 6,
+		paddingTop: 6,
 	},
 } as LabelTemplate

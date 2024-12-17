@@ -27,5 +27,10 @@ export interface LabelTemplate {
 		qrSize: number
 		offsetX: number
 		offsetY: number
+		paddingLeft?: number // default: 4
+		paddingTop?: number // default: 4
+		iconMarginBottom?: number // default: 3
+		iconMarginRight?: number // default: 6
+		textHeight?: number // default: 15
 	}
 }

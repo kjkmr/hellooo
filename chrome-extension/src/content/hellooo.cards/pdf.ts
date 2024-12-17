@@ -58,10 +58,22 @@ export default class Pdf {
 		// doc.line(x, y, x + CARD_WIDTH, y);
 		// doc.line(x, y + CARD_HEIGHT, x + CARD_WIDTH, y + CARD_HEIGHT);
 
+		const paddingLeft = template.card.paddingLeft || 4;
+		const paddingTop = template.card.paddingTop || 4;
+		const iconMarginBottom = template.card.iconMarginBottom || 3;
+		const textHeight = template.card.textHeight || 15;
+
 		// image
 		const format = this.#getImageFormat(icon);
 		const iconData = icon.data;
-		doc.addImage(iconData, format, x + 4, y + 4, template.card.iconSize, template.card.iconSize);
+		doc.addImage(
+			iconData,
+			format,
+			x + paddingLeft,
+			y + paddingTop,
+			template.card.iconSize,
+			template.card.iconSize
+		);
 		// qr
 		this.#qr.set({ value: `https://x.com/${account}` });
 		const qr = this.#qr.toDataURL('image/png');
@@ -69,18 +81,18 @@ export default class Pdf {
 		doc.addImage(
 			qr,
 			'image/png',
-			x + 4,
-			y + template.card.iconSize + 4 + 3,
+			x + paddingLeft,
+			y + template.card.iconSize + paddingTop + iconMarginBottom,
 			template.card.qrSize,
 			template.card.qrSize
 		);
 		// text
-		const marginLeft = template.card.iconSize + 10;
-		const marginTop = 6;
+		const marginLeft = paddingLeft + template.card.iconSize + (template.card.iconMarginRight || 6);
+		const marginTop = paddingTop + 2;
 		doc.setFontSize(5);
 		doc.text('X (Twitter):', x + marginLeft, y + 0 + marginTop);
-		doc.text('Company:', x + marginLeft, y + 15 + marginTop);
-		doc.text('Name:', x + marginLeft, y + 30 + marginTop);
+		doc.text('Company:', x + marginLeft, y + textHeight + marginTop);
+		doc.text('Name:', x + marginLeft, y + textHeight * 2 + marginTop);
 		doc.setFontSize(12);
 		doc.text('@' + account, x + marginLeft, y + 6 + marginTop);
 		// self.drawString((10 + template.card.iconSize) * mm, (CARD_HEIGHT - 6.5) * mm, '@' + account, 12)

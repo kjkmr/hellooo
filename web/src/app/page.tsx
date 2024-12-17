@@ -51,7 +51,7 @@ export default function Home() {
       } else if (event.data.type == "endCreatePdf") {
         console.log("endCreatePdf");
         setIsModalOpen(false);
-        downloadJson(event.data.icons, "icons.json");
+        // downloadJson(event.data.icons, "icons.json");
         Bg.getInstance().setIcons(event.data.icons);
         Bg.getInstance().showThanks();
       }
