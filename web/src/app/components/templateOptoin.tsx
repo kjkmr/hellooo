@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import { LabelTemplate } from "../../../../common/_interface";
 
 type TemplateOptionProps = {
@@ -10,8 +10,10 @@ type TemplateOptionProps = {
 export default function TemplateOption(props: TemplateOptionProps) {
   const { data, selected, onSelect } = props;
 
-  const onClick = () => {
-    onSelect(data ? data.id : "");
+  const onClick = (e: SyntheticEvent) => {
+    if ((e.target as HTMLElement).tagName.toLowerCase() != "a") {
+      onSelect(data ? data.id : "");
+    }
   };
 
   return (

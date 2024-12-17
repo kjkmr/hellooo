@@ -108,13 +108,9 @@ export default class Card extends Container {
     const p = 1 - Math.max(0, Math.min(1, d / (cx * (1 - minFlip) * 2)));
     gsap.to(this, {
       flipPosition: minFlip + p * (1 - minFlip),
-      duration: 1.25,
-      ease: "expo.out",
-    });
-    gsap.to(this, {
       flipAngle: Math.max(Math.min(a, Math.PI * -0.55), Math.PI * -0.95),
-      duration: 0.5,
-      ease: "expo.out",
+      duration: 0.75,
+      ease: "cubic.out",
     });
   };
 

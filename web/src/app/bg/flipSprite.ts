@@ -132,13 +132,9 @@ export default class FlipSprite extends Container {
     const positionDiff = Math.abs(this.flipPosition - flipPosition);
     gsap.to(this, {
       flipPosition,
-      duration: 1.25 + positionDiff * 3,
-      ease: "expo.out",
-    });
-    gsap.to(this, {
       flipAngle: Math.max(Math.min(a, this.maxFlipAngle), this.minFlipAngle),
-      duration: 0.5 + positionDiff * 2,
-      ease: "expo.out",
+      duration: 0.5 + positionDiff * 3,
+      ease: "cubic.out",
     });
     // ヒットエリア可変
     const radianToMouse = Math.atan2(mouse.y - cy, mouse.x - cx);
