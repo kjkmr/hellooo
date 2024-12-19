@@ -158,7 +158,10 @@ export default function Modal(props: ModalProps) {
   const step1 = () => {
     return (
       <div className="modal__step1">
-        <a href="" target="_blank">
+        <a
+          href="https://chromewebstore.google.com/detail/hellooo/jicgloohkdidfojpecckocfeoaiajgkp"
+          target="_blank"
+        >
           <img src="/images/extension-icon.svg" width="120" height="120" />
         </a>
         {isExtensionInstalled ? (
@@ -168,7 +171,11 @@ export default function Modal(props: ModalProps) {
             Hellooo!をご利用いただくには、
             Xのアイコン画像取得のためのChrome拡張機能が必要です。
             <br />
-            <a href="" target="_blank" className="modal__link">
+            <a
+              href="https://chromewebstore.google.com/detail/hellooo/jicgloohkdidfojpecckocfeoaiajgkp"
+              target="_blank"
+              className="modal__link"
+            >
               こちら
             </a>
             からインストールしてください。

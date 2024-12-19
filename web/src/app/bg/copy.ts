@@ -94,7 +94,6 @@ export class Copy extends Container {
     this.button.on("mousedown", () => {
       this.emit("create-button-click");
     });
-    if (isPcChrome()) this.addChild(this.button);
     this.x = 40;
     window.addEventListener("resize", this.onResize);
     this.onResize();
@@ -111,6 +110,11 @@ export class Copy extends Container {
       return;
     this.addChild(this.container);
     this.addChild(this.backsideContainer);
+    console.log(
+      `!isSpLayout() && isPcChrome(): ${!isSpLayout() && isPcChrome()}`,
+    );
+    this.button.visible = !isSpLayout() && isPcChrome();
+    if (this.button.visible) this.addChild(this.button);
     const delay = 0.25;
     await Promise.all([
       this.line1.show(delay),
@@ -153,7 +157,10 @@ export class Copy extends Container {
       this.thanksLine4?.scale.set(1.5, 1.5);
     } else {
       this.bg.visible = false;
-      if (this.button) this.button.visible = true;
+      if (this.button) {
+        this.button.visible = isPcChrome();
+        if (this.button.visible) this.addChild(this.button);
+      }
       this.y = window.innerHeight * 0.5 - 240 * s;
       this.line4?.scale.set(1, 1);
       this.thanksLine4?.scale.set(1, 1);
