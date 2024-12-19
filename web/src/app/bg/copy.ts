@@ -1,15 +1,17 @@
-import { Container, Assets } from "pixi.js";
+import { Container, Assets, RoundedRectangle, Graphics } from "pixi.js";
 import gsap from "gsap";
 import { FlipMask } from "./flipMask";
 import { FlipBackSide } from "./flipBackSide";
 import FlipSprite from "./flipSprite";
 import FlipSpriteButton from "./flipSpriteButton";
-import { isPcChrome } from "@/components/utils";
+import { isPcChrome, isSpLayout } from "@/components/utils";
 
 /**
  * コピーのコンテナ
  */
 export class Copy extends Container {
+  bg: Graphics = new Graphics();
+
   line1?: FlipSprite;
   line2?: FlipSprite;
   line3?: FlipSprite;
@@ -27,6 +29,11 @@ export class Copy extends Container {
   button?: FlipSpriteButton;
 
   async load() {
+    // スマホ用背景
+    this.bg.roundRect(-40, -80, 790, 680, 20);
+    this.bg.fill(0xffffff);
+    this.addChild(this.bg);
+    //
     const l1 = await Assets.load("/images/copy-connect.png.webp");
     const l2 = await Assets.load("/images/copy-everyone.png.webp");
     const l3 = await Assets.load("/images/copy-icon.png.webp");
@@ -137,7 +144,19 @@ export class Copy extends Container {
 
   onResize = () => {
     const s = Math.min(1, window.innerWidth / 900);
-    this.y = window.innerHeight * 0.5 - 240 * s;
     this.scale.set(s, s);
+    if (isSpLayout()) {
+      this.bg.visible = true;
+      if (this.button) this.button.visible = false;
+      this.y = window.innerHeight * 0.5 - 300 * s;
+      this.line4?.scale.set(1.5, 1.5);
+      this.thanksLine4?.scale.set(1.5, 1.5);
+    } else {
+      this.bg.visible = false;
+      if (this.button) this.button.visible = true;
+      this.y = window.innerHeight * 0.5 - 240 * s;
+      this.line4?.scale.set(1, 1);
+      this.thanksLine4?.scale.set(1, 1);
+    }
   };
 }

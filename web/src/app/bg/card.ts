@@ -109,8 +109,9 @@ export default class Card extends Container {
     gsap.to(this, {
       flipPosition: minFlip + p * (1 - minFlip),
       flipAngle: Math.max(Math.min(a, Math.PI * -0.55), Math.PI * -0.95),
-      duration: 0.75,
+      duration: 0.5,
       ease: "cubic.out",
+      overwrite: true,
     });
   };
 

@@ -126,6 +126,12 @@ export default class FlipSpriteButton extends FlipSprite {
     this.normal.mouseOver();
     this.hover.mouseOver();
   }
+
+  protected override _onMouseMove(e: FederatedPointerEvent) {
+    super._onMouseMove(e);
+    if (this._mouseOutFadeTimer) window.clearTimeout(this._mouseOutFadeTimer);
+  }
+
   protected override _onMouseOut() {
     super._onMouseOut();
     if (this._mouseOutFadeTimer) window.clearTimeout(this._mouseOutFadeTimer);

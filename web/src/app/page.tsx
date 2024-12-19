@@ -18,7 +18,7 @@ export default function Home() {
   const [spLayout, setSpLayout] = useState(false);
   const [pcChrome, setPcChrome] = useState(false);
   const [accountText, setAccountText] = useState<string>(
-    "@hellooo_cards\n@casestudy_info\n@kjkmr\n@WebMino",
+    "@hellooo_cards\n@casestudy_info\n@kjkmr\n@WebMino\n@bxoxnx\n@tomonorix0805",
   );
 
   // 初期化
@@ -27,8 +27,14 @@ export default function Home() {
     setPcChrome(isPcChrome());
     Bg.init();
     Bg.getInstance().on("create-button-click", openModal);
+    const onResize = () => {
+      setSpLayout(isSpLayout());
+      setPcChrome(isPcChrome());
+    };
+    window.addEventListener("resize", onResize);
     return () => {
       Bg.getInstance().removeAllListeners("create-button-click");
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 
@@ -121,7 +127,9 @@ export default function Home() {
           </div>
           {spLayout ? (
             <p className="main__sp-message">
-              このサービスはPCのブラウザでご利用ください。
+              このサービスはPCのブラウザで
+              <br />
+              ご利用ください。
             </p>
           ) : !pcChrome ? (
             <p className="main__chrome-message">

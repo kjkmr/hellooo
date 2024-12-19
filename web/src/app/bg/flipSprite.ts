@@ -119,6 +119,10 @@ export default class FlipSprite extends Container {
   };
 
   onMouseMove = (e: FederatedPointerEvent) => {
+    this._onMouseMove(e);
+  };
+
+  protected _onMouseMove(e: FederatedPointerEvent) {
     const mouse = e.getLocalPosition(this);
     const cx = this.sprite.width;
     const cy = this.sprite.height;
@@ -129,12 +133,17 @@ export default class FlipSprite extends Container {
     const p = 1 - Math.max(0, Math.min(1, d / (cx * (1 - this.minFlip) * 2)));
 
     const flipPosition = this.minFlip + p * (1 - this.minFlip);
+    const flipAngle = Math.max(
+      Math.min(a, this.maxFlipAngle),
+      this.minFlipAngle,
+    );
     const positionDiff = Math.abs(this.flipPosition - flipPosition);
     gsap.to(this, {
       flipPosition,
-      flipAngle: Math.max(Math.min(a, this.maxFlipAngle), this.minFlipAngle),
-      duration: 0.5 + positionDiff * 3,
+      flipAngle,
+      duration: 0.25 + positionDiff * 2.5,
       ease: "cubic.out",
+      overwrite: true,
     });
     // ヒットエリア可変
     const radianToMouse = Math.atan2(mouse.y - cy, mouse.x - cx);
@@ -151,7 +160,7 @@ export default class FlipSprite extends Container {
         h * 1.75,
       );
     }
-  };
+  }
 
   onMouseOut = (e: FederatedPointerEvent) => {
     this._onMouseOut();
