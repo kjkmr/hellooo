@@ -74,6 +74,8 @@ export class Bg extends EventEmitter {
    * @param icons
    */
   async setIcons(icons: Icon[]) {
+    // iconsの順番をランダムに
+    icons = icons.sort(() => Math.random() - 0.5);
     // アイコンを1つのキャンバスにスプライトシート化して描画
     const offset = 2;
     const iconCanvas = document.createElement("canvas");
