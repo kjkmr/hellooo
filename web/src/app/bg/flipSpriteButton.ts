@@ -91,7 +91,7 @@ export default class FlipSpriteButton extends FlipSprite {
   }
 
   onClick = (e: FederatedPointerEvent) => {
-    console.log(e);
+    // console.log(e);
   };
 
   override async show(delay: number, duration: number = 1.25) {

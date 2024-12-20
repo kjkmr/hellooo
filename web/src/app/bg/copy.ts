@@ -110,9 +110,6 @@ export class Copy extends Container {
       return;
     this.addChild(this.container);
     this.addChild(this.backsideContainer);
-    console.log(
-      `!isSpLayout() && isPcChrome(): ${!isSpLayout() && isPcChrome()}`,
-    );
     this.button.visible = !isSpLayout() && isPcChrome();
     if (this.button.visible) this.addChild(this.button);
     const delay = 0.25;

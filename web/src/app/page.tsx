@@ -18,7 +18,7 @@ export default function Home() {
   const [spLayout, setSpLayout] = useState(false);
   const [pcChrome, setPcChrome] = useState(false);
   const [accountText, setAccountText] = useState<string>(
-    "@hellooo_cards\n@casestudy_info\n@kjkmr\n@WebMino\n@bxoxnx\n@tomonorix0805",
+    "@kjkmr\n@WebMino\n@casestudy_info\n@a_saya_108\n@bxoxnx\n@tomonorix0805\n@oniguili",
   );
 
   // 初期化
