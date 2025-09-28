@@ -3,13 +3,23 @@ export function isSpLayout() {
 }
 
 export function isPcChrome() {
-  const ua = window.navigator.userAgent.toLowerCase();
-  const isChrome = ua.indexOf("chrome") !== -1;
-  const isMacOS = ua.indexOf("mac") !== -1;
-  const isWindows = ua.indexOf("windows") !== -1;
-  const isLinux = ua.indexOf("linux") !== -1;
-  return isChrome && (isMacOS || isWindows || isLinux);
+  if (navigator.userAgentData) {
+    const brands = navigator.userAgentData.brands || [];
+    const isChrome = brands.some((brand) => brand.brand.includes("Chrome"));
+    const isDesktop = navigator.userAgentData.platform === "Windows" || 
+                      navigator.userAgentData.platform === "macOS" || 
+                      navigator.userAgentData.platform === "Linux";
+    return isChrome && isDesktop;
+  } else {
+    const ua = window.navigator.userAgent.toLowerCase();
+    const isChrome = ua.indexOf("chrome") !== -1;
+    const isMacOS = ua.indexOf("mac") !== -1;
+    const isWindows = ua.indexOf("windows") !== -1;
+    const isLinux = ua.indexOf("linux") !== -1;
+    return isChrome && (isMacOS || isWindows || isLinux);
+  }
 }
+
 
 /**
  * 再起的にファイルを取得する

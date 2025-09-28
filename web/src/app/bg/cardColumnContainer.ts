@@ -18,6 +18,9 @@ export default class CardColumnContainer extends Container {
   icons: Icon[] = [];
   iconSpriteSheet?: Spritesheet;
   qrSpriteSheet?: Spritesheet;
+  handwritingsSpriteSheet?: Spritesheet;
+  label1Text?: string;
+  label2Text?: string;
 
   /**
    * コンストラクタ
@@ -75,10 +78,16 @@ export default class CardColumnContainer extends Container {
     icons: Icon[],
     iconSpriteSheet: Spritesheet,
     qrSpriteSheet: Spritesheet,
+    handwritingsSpriteSheet?: Spritesheet,
+    label1Text?: string,
+    label2Text?: string,
   ) {
     this.icons = icons;
     this.iconSpriteSheet = iconSpriteSheet;
     this.qrSpriteSheet = qrSpriteSheet;
+    this.handwritingsSpriteSheet = handwritingsSpriteSheet;
+    if (label1Text) this.label1Text = label1Text;
+    if (label2Text) this.label2Text = label2Text;
   }
 
   /**
@@ -105,9 +114,21 @@ export default class CardColumnContainer extends Container {
         this.iconTexture;
       const qrTexture =
         (icon && this.qrSpriteSheet?.textures[icon.account]) || this.qrTexture;
-      const card = new Card(icon || null, iconTexture, qrTexture);
+
+      // handwritingテクスチャを取得（アカウント名で）
+      const handwritingTexture =
+        icon && this.handwritingsSpriteSheet?.textures[icon.account];
+
+      const card = new Card(
+        icon || null,
+        iconTexture,
+        qrTexture,
+        handwritingTexture,
+        this.label1Text,
+        this.label2Text,
+      );
       const delay =
-        (this.direction > 0 ? y : numRows - y) * 0.085 + index * 0.085 * 3;
+        (this.direction > 0 ? y : numRows - y) * 0.085 + index * 0.085 * 4.5;
       card.show(delay);
       this.addChild(card);
       this.cards.push(card);

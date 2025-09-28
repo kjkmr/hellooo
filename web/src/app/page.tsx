@@ -4,12 +4,7 @@ import Button from "@/components/button.tsx";
 import Modal from "@/components/Modal";
 import "@/styles/_base.scss";
 import "@/styles/_main.scss";
-import {
-  downloadJson,
-  getAccountLists,
-  isPcChrome,
-  isSpLayout,
-} from "./components/utils";
+import { downloadJson, isPcChrome, isSpLayout } from "./components/utils";
 import { Bg } from "@/bg";
 
 export default function Home() {
@@ -18,8 +13,10 @@ export default function Home() {
   const [spLayout, setSpLayout] = useState(false);
   const [pcChrome, setPcChrome] = useState(false);
   const [accountText, setAccountText] = useState<string>(
-    "@kjkmr\n@WebMino\n@casestudy_info\n@a_saya_108\n@bxoxnx\n@tomonorix0805\n@oniguili\n@design30m\n@soundkitchen\n@akihirofujiwara\n@ToteWebdesign\n@MEFILAS_tamo2\n@free__age",
+    "@kjkmr\n@a_saya_108\n@bxoxnx\n@tomonorix0805",
   );
+  const [field1Text, setField1Text] = useState<string>("Company");
+  const [field2Text, setField2Text] = useState<string>("Name");
 
   // 初期化
   useEffect(() => {
@@ -57,8 +54,18 @@ export default function Home() {
       } else if (event.data.type == "endCreatePdf") {
         console.log("endCreatePdf");
         setIsModalOpen(false);
-        // downloadJson(event.data.icons, "icons.json");
-        Bg.getInstance().setIcons(event.data.icons);
+        if (process.env.NODE_ENV === "development") {
+          downloadJson(event.data.icons, "icons.json");
+        }
+        console.log(
+          `Page.tsx field1Text: ${field1Text}, field2Text: ${field2Text}`,
+        );
+        Bg.getInstance().setIcons(
+          event.data.icons,
+          undefined,
+          field1Text,
+          field2Text,
+        );
         Bg.getInstance().showThanks();
       }
     };
@@ -68,7 +75,7 @@ export default function Home() {
         window.removeEventListener("message", onGetMessage);
       };
     }
-  }, []);
+  }, [field1Text, field2Text]);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -154,7 +161,7 @@ export default function Home() {
         <a href="https://x.com/WebMino" target="_blank">
           @WebMino
         </a>
-        &nbsp;/ This service is originally made for&nbsp;
+        &nbsp;/ Originally made for&nbsp;
         <a href="https://x.com/casestudy_info" target="_blank">
           @casestudy_info
         </a>
@@ -168,6 +175,10 @@ export default function Home() {
         setStep={setStep}
         accountText={accountText}
         setAccountText={setAccountText}
+        field1Text={field1Text}
+        setField1Text={setField1Text}
+        field2Text={field2Text}
+        setField2Text={setField2Text}
       />
     </>
   );

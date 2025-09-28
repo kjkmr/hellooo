@@ -47,7 +47,7 @@ export default class FlipSprite extends Container {
     this.sprite.tint = 0x000000;
     const backsideSprite = new Sprite(texture);
     backsideSprite.scale.set(1 / resolution, 1 / resolution);
-    backsideSprite.tint = 0xfd5100;
+    backsideSprite.tint = 0xfd5100; // ここで裏面の色指定
     this.backSide = new FlipBackSide(backsideSprite);
     const w = texture.width / resolution;
     const h = texture.height / resolution;
@@ -107,7 +107,7 @@ export default class FlipSprite extends Container {
     // if (mouse.x < this.sprite.width * 0.5) return;
     this.on("mousemove", this.onMouseMove);
     this.on("mousedown", this.onMouseDown);
-    this.parent.addChild(this);
+    if (this.parent) this.parent.addChild(this);
     const h = Math.min(this.sprite.height, this.maxHeight || 9999);
     if (this.changeHitArea) {
       this.hitArea = new Rectangle(-40, -h * 0.5, this.sprite.width, h * 2);
@@ -141,7 +141,7 @@ export default class FlipSprite extends Container {
     gsap.to(this, {
       flipPosition,
       flipAngle,
-      duration: 0.25 + positionDiff * 2.5,
+      duration: 0.25 + positionDiff * 1,
       ease: "cubic.out",
       overwrite: true,
     });

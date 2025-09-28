@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sprites": "node scripts/extract-icons-to-webp.js && node scripts/convert-to-webp.js && node scripts/create-separate-spritesheets.js --cleanup"
   },
   "dependencies": {
     "gsap": "^3.12.5",
@@ -20,6 +21,7 @@
     "@types/pixi.js": "^5.0.0",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "canvas": "^3.2.0",
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.3",
     "eslint-config-prettier": "^9.1.0",

@@ -15,8 +15,11 @@ export default class CardContainer extends Container {
   icons: Icon[] = [];
   iconSpriteSheet?: Spritesheet;
   qrSpriteSheet?: Spritesheet;
+  handwritingsSpriteSheet?: Spritesheet;
   iconTexture?: Texture;
   qrTexture?: Texture;
+  label1Text?: string;
+  label2Text?: string;
 
   /**
    * コンストラクタ
@@ -39,6 +42,9 @@ export default class CardContainer extends Container {
     icons: Icon[],
     iconSpriteSheet: Spritesheet,
     qrSpriteSheet: Spritesheet,
+    handwritingsSpriteSheet?: Spritesheet,
+    label1Text?: string,
+    label2Text?: string,
   ) {
     this.rotation = 15 * (Math.PI / 180);
     this.icons = icons;
@@ -50,8 +56,15 @@ export default class CardContainer extends Container {
       this.qrSpriteSheet.textureSource.destroy();
       this.qrSpriteSheet.destroy();
     }
+    if (this.handwritingsSpriteSheet) {
+      this.handwritingsSpriteSheet.textureSource.destroy();
+      this.handwritingsSpriteSheet.destroy();
+    }
     this.iconSpriteSheet = iconSpriteSheet;
     this.qrSpriteSheet = qrSpriteSheet;
+    this.handwritingsSpriteSheet = handwritingsSpriteSheet;
+    if (label1Text) this.label1Text = label1Text;
+    if (label2Text) this.label2Text = label2Text;
     this._onResize();
   }
 
@@ -96,7 +109,14 @@ export default class CardContainer extends Container {
 
     this.columns.forEach((column, i) => {
       if (this.icons.length && this.iconSpriteSheet && this.qrSpriteSheet) {
-        column.setIcons(this.icons, this.iconSpriteSheet, this.qrSpriteSheet);
+        column.setIcons(
+          this.icons,
+          this.iconSpriteSheet,
+          this.qrSpriteSheet,
+          this.handwritingsSpriteSheet,
+          this.label1Text,
+          this.label2Text,
+        );
       }
       column.reset(i);
     });

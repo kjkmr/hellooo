@@ -1,5 +1,4 @@
 import { jsPDF } from 'jspdf';
-//@ts-ignore
 import QRious from 'qrious';
 import { Icon, LabelTemplate } from '../../../../common/_interface';
 
@@ -13,7 +12,7 @@ export default class Pdf {
 	 * createPdf
 	 * @param icons
 	 */
-	async create(icons: Icon[], template: LabelTemplate) {
+	async create(icons: Icon[], template: LabelTemplate, field1Text: string, field2Text: string) {
 		const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
 		const numCardsPerPage = template.page.numCardsX * template.page.numCardsY;
 		for (let i = 0; i < icons.length / numCardsPerPage; i++) {
@@ -21,7 +20,9 @@ export default class Pdf {
 			await this.#createPage(
 				doc,
 				icons.slice(i * numCardsPerPage, (i + 1) * numCardsPerPage),
-				template
+				template,
+				field1Text,
+				field2Text
 			);
 		}
 		doc.save('hellooo.pdf');
@@ -32,9 +33,15 @@ export default class Pdf {
 	 * @param doc
 	 * @param icons
 	 */
-	async #createPage(doc: jsPDF, icons: Icon[], template: LabelTemplate) {
+	async #createPage(
+		doc: jsPDF,
+		icons: Icon[],
+		template: LabelTemplate,
+		field1Text: string,
+		field2Text: string
+	) {
 		for (let i = 0; i < icons.length; i++) {
-			await this.#createCard(doc, icons[i], i, template);
+			await this.#createCard(doc, icons[i], i, template, field1Text, field2Text);
 		}
 	}
 
@@ -44,7 +51,14 @@ export default class Pdf {
 	 * @param icon
 	 * @param index
 	 */
-	async #createCard(doc: jsPDF, icon: Icon, index: number, template: LabelTemplate) {
+	async #createCard(
+		doc: jsPDF,
+		icon: Icon,
+		index: number,
+		template: LabelTemplate,
+		field1Text: string,
+		field2Text: string
+	) {
 		doc.setFontSize(12);
 		const account = icon.account;
 		const numColumns = template.page.numCardsX;
@@ -64,38 +78,50 @@ export default class Pdf {
 		const textHeight = template.card.textHeight || 15;
 
 		// image
-		const format = this.#getImageFormat(icon);
-		const iconData = icon.data;
-		doc.addImage(
-			iconData,
-			format,
-			x + paddingLeft,
-			y + paddingTop,
-			template.card.iconSize,
-			template.card.iconSize
-		);
+		if (icon.data) {
+			const format = this.#getImageFormat(icon);
+			const iconData = icon.data;
+			doc.addImage(
+				iconData,
+				format,
+				x + paddingLeft,
+				y + paddingTop,
+				template.card.iconSize,
+				template.card.iconSize
+			);
+		}
 		// qr
-		this.#qr.set({ value: `https://x.com/${account}` });
-		const qr = this.#qr.toDataURL('image/png');
-		icon.qr = qr;
-		doc.addImage(
-			qr,
-			'image/png',
-			x + paddingLeft,
-			y + template.card.iconSize + paddingTop + iconMarginBottom,
-			template.card.qrSize,
-			template.card.qrSize
-		);
+		if (account) {
+			const qrUrl = icon.platform === 'instagram'
+				? `https://instagram.com/${account}`
+				: `https://x.com/${account}`;
+			this.#qr.set({ value: qrUrl });
+			const qr = this.#qr.toDataURL('image/png');
+			icon.qr = qr;
+			doc.addImage(
+				qr,
+				'image/png',
+				x + paddingLeft,
+				y + template.card.iconSize + paddingTop + iconMarginBottom,
+				template.card.qrSize,
+				template.card.qrSize
+			);
+		}
 		// text
-		const marginLeft = paddingLeft + template.card.iconSize + (template.card.iconMarginRight || 6);
+		const marginLeft = account
+			? paddingLeft + template.card.iconSize + (template.card.iconMarginRight || 6)
+			: paddingLeft;
+
 		const marginTop = paddingTop + 2;
 		doc.setFontSize(5);
 		doc.text('X (Twitter):', x + marginLeft, y + 0 + marginTop);
-		doc.text('Company:', x + marginLeft, y + textHeight + marginTop);
-		doc.text('Name:', x + marginLeft, y + textHeight * 2 + marginTop);
-		doc.setFontSize(12);
-		doc.text('@' + account, x + marginLeft, y + 6 + marginTop);
-		// self.drawString((10 + template.card.iconSize) * mm, (CARD_HEIGHT - 6.5) * mm, '@' + account, 12)
+		doc.text(field1Text + ':', x + marginLeft, y + textHeight + marginTop);
+		doc.text(field2Text + ':', x + marginLeft, y + textHeight * 2 + marginTop);
+		if (account) {
+			doc.setFontSize(12);
+			doc.text('@' + account, x + marginLeft, y + 6 + marginTop);
+			// self.drawString((10 + template.card.iconSize) * mm, (CARD_HEIGHT - 6.5) * mm, '@' + account, 12)
+		}
 	}
 
 	#getImageFormat(icon: Icon) {

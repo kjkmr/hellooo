@@ -53,7 +53,7 @@ export class Copy extends Container {
     this.thanksLine2 = new FlipSprite(t2, 96);
     this.thanksLine3 = new FlipSprite(t3, 96);
     this.thanksLine4 = new FlipSprite(t4, 96);
-    this.line2.position.y = 110;
+    this.line2.position.y = 111;
     this.line3.position.y = 220;
     this.line4.position.y = 360;
     this.thanksLine2.position.y = 110;

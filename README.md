@@ -15,9 +15,13 @@
 ### コマンド
 ```
 nodenv install
-yarn
-yarn dev
+npm install
+npm run dev
 ```
+
+### 公開
+以下から
+https://chrome.google.com/webstore/devconsole/fcf8c08a-b76d-4d86-aff6-e79bbb3c299e
 
 ### Chrome拡張のインストール
 

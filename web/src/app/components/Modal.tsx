@@ -4,12 +4,17 @@ import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 import TemplateList from "./templateList";
 import "@/styles/_modal.scss";
 import { getAccountLists } from "./utils";
+import { platform } from "os";
 
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   accountText: string;
   setAccountText: (text: string) => void;
+  field1Text: string;
+  setField1Text: (text: string) => void;
+  field2Text: string;
+  setField2Text: (text: string) => void;
   step: number;
   setStep: (step: number) => void;
   onClose?: () => void;
@@ -21,6 +26,10 @@ export default function Modal(props: ModalProps) {
     setIsOpen,
     accountText,
     setAccountText,
+    field1Text,
+    setField1Text,
+    field2Text,
+    setField2Text,
     onClose,
     step,
     setStep,
@@ -29,6 +38,9 @@ export default function Modal(props: ModalProps) {
   const [isExtensionInstalled, setIsExtensionInstalled] = useState(false);
   const dropAreaRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const snsSelectRef = useRef<HTMLSelectElement>(null);
+  const textField1Ref = useRef<HTMLInputElement>(null);
+  const textField2Ref = useRef<HTMLInputElement>(null);
 
   // ドラッグ&ドロップ初期化
   useEffect(() => {
@@ -82,19 +94,28 @@ export default function Modal(props: ModalProps) {
 
   // インストール済みの場合はステップ2に進む
   useEffect(() => {
+    // クライアントサイドでのみ実行
+    if (typeof window === "undefined") return;
+
     // 拡張機能がインストールされているかチェック
     const checkIsExtensionInstalled = () => {
       return window.document.documentElement.classList.contains(
         "hellooo-installed",
       );
     };
-    setIsExtensionInstalled(checkIsExtensionInstalled());
+
+    // 少し遅延させてから実行（DOMが完全に準備された後）
+    const timer = setTimeout(() => {
+      setIsExtensionInstalled(checkIsExtensionInstalled());
+      if (checkIsExtensionInstalled() && step == 1) setStep(2);
+    }, 100);
 
     window.postMessage({
       type: isOpen ? "modalOpen" : "modalClose",
       selectedTemplateId: templateId,
     });
-    if (checkIsExtensionInstalled() && step == 1) setStep(2);
+
+    return () => clearTimeout(timer);
   }, [isOpen]);
 
   // テキストエリアの設定
@@ -116,6 +137,18 @@ export default function Modal(props: ModalProps) {
     setAccountText(text);
   };
 
+  const onField1Change = (event: SyntheticEvent) => {
+    if (!textField1Ref.current) return;
+    const text = textField1Ref.current.value;
+    setField1Text(text);
+  };
+
+  const onField2Change = (event: SyntheticEvent) => {
+    if (!textField2Ref.current) return;
+    const text = textField2Ref.current.value;
+    setField2Text(text);
+  };
+
   /**
    * 作成ボタンクリック時
    */
@@ -130,9 +163,26 @@ export default function Modal(props: ModalProps) {
       setStep(2);
       return;
     }
+
+    // フィールド1、フィールド2の半角英数字チェック
+    const alphanumericRegex = /^[a-zA-Z0-9\s]*$/;
+
+    if (!alphanumericRegex.test(field1Text)) {
+      alert("フィールド1は半角英数字のみで入力してください。");
+      return;
+    }
+
+    if (!alphanumericRegex.test(field2Text)) {
+      alert("フィールド2は半角英数字のみで入力してください。");
+      return;
+    }
+
     window.postMessage({
       type: "create",
       accounts: accountText.split("\n"),
+      platform: snsSelectRef.current?.value || "x",
+      field1Text,
+      field2Text,
       selectedTemplateId: templateId,
     });
   };
@@ -215,14 +265,45 @@ export default function Modal(props: ModalProps) {
   const step3 = () => {
     return (
       <div className="modal__step3">
-        <textarea
-          ref={textareaRef}
-          onChange={onTextAreaChange}
-          value={accountText}
-        />
-        <div>
+        <div className="modal__step3__form">
+          <textarea
+            ref={textareaRef}
+            onChange={onTextAreaChange}
+            value={accountText}
+          />
+        </div>
+        <div className="modal__step3__customize">
+          <div>
+            <label>SNS</label>
+            <select ref={snsSelectRef}>
+              <option value="x">X (旧Twitter)</option>
+              <option value="instagram">Instagram</option>
+            </select>
+          </div>
+          <div>
+            <label>フィールド 1</label>
+            <input
+              type="text"
+              maxLength={20}
+              onChange={onField1Change}
+              ref={textField1Ref}
+              value={field1Text}
+            />
+          </div>
+          <div>
+            <label>フィールド 2</label>
+            <input
+              type="text"
+              maxLength={20}
+              onChange={onField2Change}
+              ref={textField2Ref}
+              value={field2Text}
+            />
+          </div>
+        </div>
+        <div className="modal__step3__submit">
           <p className="modal__text">
-            シールを作成するアカウントのリスト（1行に1アカウント）を入力するか、テキストファイルをドラッグ&ドロップしてください。
+            1行に1アカウントのリストを入力するか、テキストファイルをドラッグ&ドロップしてください。
           </p>
           <button className="modal__button" onClick={handleCreate}>
             作成開始！

@@ -7,6 +7,8 @@ export class FlipMask extends Graphics {
   protected _height: number;
   protected _flipAngle: number = Math.PI * -0.5;
   protected _flipPosition: number = 0;
+  protected _lastDrawnAngle: number = NaN;
+  protected _lastDrawnPosition: number = NaN;
 
   get flipAngle() {
     return this._flipAngle;
@@ -14,7 +16,7 @@ export class FlipMask extends Graphics {
 
   set flipAngle(angle: number) {
     this._flipAngle = angle;
-    this.draw();
+    this.drawIfNeeded();
   }
 
   get flipPosition() {
@@ -22,7 +24,7 @@ export class FlipMask extends Graphics {
   }
   set flipPosition(position: number) {
     this._flipPosition = position;
-    this.draw();
+    this.drawIfNeeded();
   }
 
   /**
@@ -33,6 +35,19 @@ export class FlipMask extends Graphics {
     this._width = width;
     this._height = height;
     this.draw();
+  }
+
+  drawIfNeeded() {
+    // 前回の描画から値が変わっていない場合はスキップ
+    if (
+      this._flipAngle === this._lastDrawnAngle &&
+      this._flipPosition === this._lastDrawnPosition
+    ) {
+      return;
+    }
+    this.draw();
+    this._lastDrawnAngle = this._flipAngle;
+    this._lastDrawnPosition = this._flipPosition;
   }
 
   draw() {

@@ -8,7 +8,7 @@ export class XApp {
 	startedOn: number;
 
 	constructor() {
-		console.log('XApp');
+		// console.log('XApp');
 		this.startedOn = Date.now();
 		this.check();
 	}
@@ -19,7 +19,7 @@ export class XApp {
 		// URLからアカウント名取得
 		const account = document.location.pathname.split('/')[1];
 		if (img) {
-			console.log('iconUrl:', img.src);
+			// console.log('iconUrl:', img.src);
 			chrome.runtime.sendMessage({ iconUrl: img.src, account });
 		} else {
 			if (Date.now() - this.startedOn < 5000) {

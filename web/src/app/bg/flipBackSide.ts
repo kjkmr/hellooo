@@ -43,6 +43,8 @@ export class FlipBackSide extends Container {
   protected _flipAngle: number = Math.PI * -0.5;
   protected _flipPosition: number = 0;
   protected _moveVector: Point = new Point();
+  protected _lastResetAngle: number = NaN;
+  protected _lastResetPosition: number = NaN;
 
   // Debug
   gp = new Graphics();
@@ -105,6 +107,16 @@ export class FlipBackSide extends Container {
   }
 
   reset() {
+    // 前回のリセットから値が変わっていない場合はスキップ
+    if (
+      this._flipAngle === this._lastResetAngle &&
+      this._flipPosition === this._lastResetPosition
+    ) {
+      return;
+    }
+    this._lastResetAngle = this._flipAngle;
+    this._lastResetPosition = this._flipPosition;
+
     const w = this.content.width;
     const h = this.content.height;
     const maskPoint = new Point(w * this.flipPosition, h * this.flipPosition);

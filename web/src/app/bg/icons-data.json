@@ -1,0 +1,79 @@
+[
+  {
+    "account": "kjkmr",
+    "url": "https://pbs.twimg.com/profile_images/949887857291796481/3AW28U4O_400x400.jpg",
+    "dataPath": "/images/sprites/icons/kjkmr.jpg",
+    "qrPath": "/images/sprites/qr/kjkmr.png"
+  },
+  {
+    "account": "WebMino",
+    "url": "https://pbs.twimg.com/profile_images/1578208134807842816/Ae-fniY0_400x400.jpg",
+    "dataPath": "/images/sprites/icons/WebMino.jpg",
+    "qrPath": "/images/sprites/qr/WebMino.png"
+  },
+  {
+    "account": "casestudy_info",
+    "url": "https://pbs.twimg.com/profile_images/1536223584116707328/EfGvldQ2_400x400.jpg",
+    "dataPath": "/images/sprites/icons/casestudy_info.jpg",
+    "qrPath": "/images/sprites/qr/casestudy_info.png"
+  },
+  {
+    "account": "a_saya_108",
+    "url": "https://pbs.twimg.com/profile_images/1554846261412786177/6R8V0Aq3_400x400.jpg",
+    "dataPath": "/images/sprites/icons/a_saya_108.jpg",
+    "qrPath": "/images/sprites/qr/a_saya_108.png"
+  },
+  {
+    "account": "bxoxnx",
+    "url": "https://pbs.twimg.com/profile_images/1637327913489170432/W3hZESOX_400x400.jpg",
+    "dataPath": "/images/sprites/icons/bxoxnx.jpg",
+    "qrPath": "/images/sprites/qr/bxoxnx.png"
+  },
+  {
+    "account": "tomonorix0805",
+    "url": "https://pbs.twimg.com/profile_images/1733119598701277184/u64ga8P4_400x400.jpg",
+    "dataPath": "/images/sprites/icons/tomonorix0805.jpg",
+    "qrPath": "/images/sprites/qr/tomonorix0805.png"
+  },
+  {
+    "account": "oniguili",
+    "url": "https://pbs.twimg.com/profile_images/1839920728596197376/5JmzCCy9_400x400.jpg",
+    "dataPath": "/images/sprites/icons/oniguili.jpg",
+    "qrPath": "/images/sprites/qr/oniguili.png"
+  },
+  {
+    "account": "design30m",
+    "url": "https://pbs.twimg.com/profile_images/1775120079375785985/ngDy67TE_400x400.jpg",
+    "dataPath": "/images/sprites/icons/design30m.jpg",
+    "qrPath": "/images/sprites/qr/design30m.png"
+  },
+  {
+    "account": "soundkitchen",
+    "url": "https://pbs.twimg.com/profile_images/922756573096591360/-J7-8r4Y_400x400.jpg",
+    "dataPath": "/images/sprites/icons/soundkitchen.jpg",
+    "qrPath": "/images/sprites/qr/soundkitchen.png"
+  },
+  {
+    "account": "akihirofujiwara",
+    "url": "https://pbs.twimg.com/profile_images/1831193827152891904/aG68aEmb_400x400.jpg",
+    "dataPath": "/images/sprites/icons/akihirofujiwara.jpg",
+    "qrPath": "/images/sprites/qr/akihirofujiwara.png"
+  },
+  {
+    "account": "ToteWebdesign",
+    "url": "https://pbs.twimg.com/profile_images/1274041529300946950/NJgd2oia_400x400.jpg",
+    "dataPath": "/images/sprites/icons/ToteWebdesign.jpg",
+    "qrPath": "/images/sprites/qr/ToteWebdesign.png"
+  },
+  {
+    "account": "MEFILAS_tamo2",
+    "url": "https://pbs.twimg.com/profile_images/218652700/t_face_reasonably_small.gif",
+    "qrPath": "/images/sprites/qr/MEFILAS_tamo2.png"
+  },
+  {
+    "account": "free__age",
+    "url": "https://pbs.twimg.com/profile_images/1601255813615874048/2b8VHWue_400x400.jpg",
+    "dataPath": "/images/sprites/icons/free__age.jpg",
+    "qrPath": "/images/sprites/qr/free__age.png"
+  }
+]
