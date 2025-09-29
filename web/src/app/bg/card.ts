@@ -73,10 +73,8 @@ export default class Card extends Container {
       this.handwriting = new CardHandwriting(handwritingTexture);
     }
     //
-    console.log(icon);
     const text = icon?.platform === "instagram" ? "Instagram:" : "X(Twitter):";
     this.accountLabel = new CardLabelText(text, 110, 25);
-    console.log(this.accountLabel.text);
     this.transparentBg.alpha = 0;
     this.container.addChild(this.bg);
     this.container.addChild(this.icon);
