@@ -339,7 +339,7 @@ export default function Modal(props: ModalProps) {
           <li className={`modal__navItem ${step === 3 ? "active" : ""}`}>
             <a onClick={() => setStep(3)}>
               <span>3</span>
-              Xアカウント
+              アカウント
             </a>
           </li>
         </ul>

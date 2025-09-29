@@ -114,7 +114,8 @@ export default class Pdf {
 
 		const marginTop = paddingTop + 2;
 		doc.setFontSize(5);
-		doc.text('X (Twitter):', x + marginLeft, y + 0 + marginTop);
+		const platformLabel = icon.platform === 'instagram' ? 'Instagram:' : 'X (Twitter):';
+		doc.text(platformLabel, x + marginLeft, y + 0 + marginTop);
 		doc.text(field1Text + ':', x + marginLeft, y + textHeight + marginTop);
 		doc.text(field2Text + ':', x + marginLeft, y + textHeight * 2 + marginTop);
 		if (account) {

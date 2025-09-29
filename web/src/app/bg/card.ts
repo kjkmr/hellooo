@@ -39,7 +39,7 @@ export default class Card extends Container {
   icon: CardSprite;
   qr: CardSprite;
   handwriting?: CardHandwriting;
-  accountLabel: CardLabelText = new CardLabelText("X(Twitter):", 110, 25);
+  accountLabel: CardLabelText;
   account: CardText = new CardText(110, 40);
   label1: CardLabelText = new CardLabelText("Company:", 110, 25 + 53);
   label2: CardLabelText = new CardLabelText("Name:", 110, 25 + 53 * 2);
@@ -72,6 +72,11 @@ export default class Card extends Container {
     if (handwritingTexture) {
       this.handwriting = new CardHandwriting(handwritingTexture);
     }
+    //
+    console.log(icon);
+    const text = icon?.platform === "instagram" ? "Instagram:" : "X(Twitter):";
+    this.accountLabel = new CardLabelText(text, 110, 25);
+    console.log(this.accountLabel.text);
     this.transparentBg.alpha = 0;
     this.container.addChild(this.bg);
     this.container.addChild(this.icon);
@@ -120,7 +125,9 @@ export default class Card extends Container {
     if (this.parent) this.parent.addChild(this);
     // アニメーションフレーム開始
     if (!this._animationFrameId) {
-      this._animationFrameId = window.requestAnimationFrame(this.updateFlipAnimation);
+      this._animationFrameId = window.requestAnimationFrame(
+        this.updateFlipAnimation,
+      );
     }
   };
 
@@ -140,7 +147,7 @@ export default class Card extends Container {
       if (a > 0) a -= Math.PI * 2;
       const minFlip = 0.75;
       const p = 1 - Math.max(0, Math.min(1, d / (cx * (1 - minFlip) * 2)));
-      
+
       gsap.to(this, {
         flipPosition: minFlip + p * (1 - minFlip),
         flipAngle: Math.max(Math.min(a, Math.PI * -0.55), Math.PI * -0.95),
@@ -149,23 +156,25 @@ export default class Card extends Container {
         overwrite: true,
       });
     }
-    
+
     // 次のフレームをリクエスト
     if (this._mousePosition) {
-      this._animationFrameId = window.requestAnimationFrame(this.updateFlipAnimation);
+      this._animationFrameId = window.requestAnimationFrame(
+        this.updateFlipAnimation,
+      );
     }
   };
 
   onMouseOut = (e: FederatedPointerEvent) => {
     this.off("mousemove", this.onMouseMove);
     this._mousePosition = null;
-    
+
     // アニメーションフレームをキャンセル
     if (this._animationFrameId) {
       window.cancelAnimationFrame(this._animationFrameId);
       this._animationFrameId = 0;
     }
-    
+
     if (this._mouseOutTimer) window.clearTimeout(this._mouseOutTimer);
     this._mouseOutTimer = window.setTimeout(() => {
       gsap.to(this, {
