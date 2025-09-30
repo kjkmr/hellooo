@@ -43,30 +43,36 @@ export default function Home() {
   // window.postMessageを受け取って、モーダルを開く
   useEffect(() => {
     const onGetMessage = (event: MessageEvent) => {
+      console.log("[Page.postMessage] Received message:", event.data.type);
       if (event.data.type == "openStep" && event.data.step === 2) {
+        console.log("[Page.postMessage] Opening modal for step 2");
         setIsModalOpen(true);
       } else if (event.data.type == "startGetIcons") {
-        console.log("startGetIcons");
+        console.log("[Page.postMessage] startGetIcons");
       } else if (event.data.type == "endGetIcons") {
-        console.log(event.data.icons);
+        console.log("[Page.postMessage] endGetIcons - icons:", event.data.icons?.length);
       } else if (event.data.type == "startCreatePdf") {
-        console.log("startCreatePdf");
+        console.log("[Page.postMessage] startCreatePdf");
       } else if (event.data.type == "endCreatePdf") {
-        console.log("endCreatePdf");
+        console.log("[Page.postMessage] endCreatePdf - received", event.data.icons?.length, "icons");
+        console.log("[Page.postMessage] Icons data:", event.data.icons);
         setIsModalOpen(false);
         if (process.env.NODE_ENV === "development") {
           downloadJson(event.data.icons, "icons.json");
         }
         console.log(
-          `Page.tsx field1Text: ${field1Text}, field2Text: ${field2Text}`,
+          `[Page.postMessage] field1Text: ${field1Text}, field2Text: ${field2Text}`,
         );
+        console.log("[Page.postMessage] Calling Bg.getInstance().setIcons");
         Bg.getInstance().setIcons(
           event.data.icons,
           undefined,
           field1Text,
           field2Text,
         );
+        console.log("[Page.postMessage] Calling Bg.getInstance().showThanks");
         Bg.getInstance().showThanks();
+        console.log("[Page.postMessage] Complete");
       }
     };
     if (window !== undefined) {

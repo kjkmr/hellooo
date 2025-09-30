@@ -210,15 +210,19 @@ export default class Card extends Container {
    * @param delay
    */
   show(delay: number) {
+    console.log("[Card.show] Scheduling show for card", this.data?.account || "no-data", "with delay", delay);
     setTimeout(() => {
+      console.log("[Card.show] Showing card", this.data?.account || "no-data");
       this.visible = true;
       this.accountLabel.show();
       this.account.show();
       this.label1.show();
       this.label2.show();
+      console.log("[Card.show] Labels shown for card", this.data?.account || "no-data");
 
       // handwritingを0.5秒後に表示
       if (this.handwriting) {
+        console.log("[Card.show] Showing handwriting for card", this.data?.account);
         this.handwriting.show(0.75);
       }
 
@@ -242,6 +246,7 @@ export default class Card extends Container {
         ease: ease,
         overwrite: true,
       });
+      console.log("[Card.show] Animation started for card", this.data?.account || "no-data");
     }, delay * 1000);
   }
 }

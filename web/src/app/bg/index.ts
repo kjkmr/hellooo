@@ -42,6 +42,7 @@ export class Bg extends EventEmitter {
     this.copy.on("create-button-click", () => {
       this.emit("create-button-click");
     });
+    console.log("[Bg] Application initialization started");
     this.app
       .init({
         background: "#f5f5f5",
@@ -52,25 +53,37 @@ export class Bg extends EventEmitter {
         powerPreference: "high-performance",
       })
       .then(async () => {
+        console.log("[Bg] Application initialized successfully");
+        console.log("[Bg] Loading copy and cardContainer...");
         await this.copy.load();
         await this.cardContainer.load();
+        console.log("[Bg] Copy and cardContainer loaded");
         this.app.canvas.classList.add("bg");
         document.body.appendChild(this.app.canvas);
+        console.log("[Bg] Canvas appended to body");
         this.app.stage.addChild(this.cardContainer);
         this.app.stage.addChild(this.copy);
         document.documentElement.classList.add("ready");
+        console.log("[Bg] Copy showing...");
         await this.copy.show();
+        console.log("[Bg] Copy shown");
 
         // デフォルトでスプライトシートを使用する場合
         try {
+          console.log("[Bg] Loading spritesheet data...");
           const spritesheetData = await import("./spritesheet-data.json");
+          console.log("[Bg] Spritesheet data loaded, setting icons with spritesheet");
           await this.setIconsWithSpritesheet(icons, spritesheetData.default);
+          console.log("[Bg] Icons set with spritesheet successfully");
         } catch (error) {
+          console.error("[Bg] Failed to load spritesheet, falling back to Base64 mode:", error);
           // スプライトシートが無い場合は従来のBase64モードにフォールバック
           await this.setIcons(icons);
         }
 
+        console.log("[Bg] Initializing cardContainer");
         this.cardContainer.init();
+        console.log("[Bg] Initialization complete");
       });
   }
 
@@ -92,8 +105,10 @@ export class Bg extends EventEmitter {
    * スプライトシートを使用してアイコンをセット
    */
   async setIconsWithSpritesheet(icons: Icon[], spritesheetData: any) {
+    console.log("[Bg.setIconsWithSpritesheet] Called with", icons.length, "icons");
     // WebPサポートを確認
     const supportsWebP = await this.checkWebPSupport();
+    console.log("[Bg.setIconsWithSpritesheet] WebP support:", supportsWebP);
 
     // スプライトシートのパスを決定
     const iconSpritePath =
@@ -111,6 +126,12 @@ export class Bg extends EventEmitter {
       supportsWebP && spritesheetData.handwritings?.meta.imageWebp
         ? spritesheetData.handwritings.meta.imageWebp
         : spritesheetData.handwritings?.meta.image;
+
+    console.log("[Bg.setIconsWithSpritesheet] Paths:", {
+      iconSpritePath,
+      qrSpritePath,
+      handwritingsSpritePath,
+    });
 
     if (!iconSpritePath || !qrSpritePath) {
       console.warn(
@@ -133,6 +154,7 @@ export class Bg extends EventEmitter {
       options.handwritingsSpriteData = spritesheetData.handwritings;
     }
 
+    console.log("[Bg.setIconsWithSpritesheet] Calling setIcons with spritesheet options");
     return this.setIcons(icons, options);
   }
 
@@ -147,8 +169,10 @@ export class Bg extends EventEmitter {
     label1Text: string = "Company",
     label2Text: string = "Name",
   ) {
+    console.log("[Bg.setIcons] Called with", icons.length, "icons, mode:", options ? "spritesheet" : "base64");
     // iconsの順番をランダムに
     icons = icons.sort(() => Math.random() - 0.5);
+    console.log("[Bg.setIcons] Icons randomized");
 
     let iconSpriteSheet: Spritesheet;
     let qrSpriteSheet: Spritesheet;
@@ -156,6 +180,7 @@ export class Bg extends EventEmitter {
 
     // スプライトシートモード
     if (options?.iconSpritePath && options?.qrSpritePath) {
+      console.log("[Bg.setIcons] Spritesheet mode - loading textures");
       try {
         // 必須のスプライトシートテクスチャを読み込み
         const textures = await Promise.all([
@@ -166,6 +191,7 @@ export class Bg extends EventEmitter {
             ? Assets.load(options.handwritingsSpritePath)
             : Promise.resolve(null),
         ]);
+        console.log("[Bg.setIcons] Textures loaded");
 
         const [iconTexture, qrTexture, handwritingsTexture] = textures;
 
@@ -186,24 +212,29 @@ export class Bg extends EventEmitter {
             frames: options.handwritingsSpriteData.frames,
             meta: options.handwritingsSpriteData.meta,
           });
+          console.log("[Bg.setIcons] Handwritings spritesheet created");
         }
 
         // スプライトシートを解析
+        console.log("[Bg.setIcons] Parsing spritesheets...");
         const parsePromises = [iconSpriteSheet.parse(), qrSpriteSheet.parse()];
         if (handwritingsSpriteSheet) {
           parsePromises.push(handwritingsSpriteSheet.parse());
         }
         await Promise.all(parsePromises);
+        console.log("[Bg.setIcons] Spritesheets parsed successfully");
       } catch (error) {
-        console.error("スプライトシート読み込みエラー:", error);
+        console.error("[Bg.setIcons] スプライトシート読み込みエラー:", error);
         return this.setIconsBase64(icons);
       }
     } else {
-      // Base64モード（従来の実装）
+      console.log("[Bg.setIcons] Base64 mode - delegating to setIconsBase64");
+      // Base64モード(従来の実装)
       return this.setIconsBase64(icons, label1Text, label2Text);
     }
 
     // CardContainerにスプライトシートを渡す
+    console.log("[Bg.setIcons] Calling cardContainer.setIcons with", icons.length, "icons");
     this.cardContainer.setIcons(
       icons,
       iconSpriteSheet!,
@@ -212,6 +243,7 @@ export class Bg extends EventEmitter {
       label1Text,
       label2Text,
     );
+    console.log("[Bg.setIcons] Complete");
   }
 
   /**
@@ -222,10 +254,12 @@ export class Bg extends EventEmitter {
     label1Text?: string,
     label2Text?: string,
   ) {
+    console.log("[Bg.setIconsBase64] Called with", icons.length, "icons");
     // データが空の場合はスキップ
     const validIcons = icons.filter((icon) => icon.data && icon.data !== "");
+    console.log("[Bg.setIconsBase64] Valid icons:", validIcons.length);
     if (validIcons.length === 0) {
-      console.warn("有効なBase64データを持つアイコンがありません");
+      console.warn("[Bg.setIconsBase64] 有効なBase64データを持つアイコンがありません");
       return;
     }
 
@@ -325,8 +359,10 @@ export class Bg extends EventEmitter {
 
     const iconSpriteSheet = new Spritesheet(iconTexture, atlasData);
     const qrSpriteSheet = new Spritesheet(qrTexture, atlasData);
+    console.log("[Bg.setIconsBase64] Parsing spritesheets...");
     await iconSpriteSheet.parse();
     await qrSpriteSheet.parse();
+    console.log("[Bg.setIconsBase64] Spritesheets parsed, calling cardContainer.setIcons");
 
     this.cardContainer.setIcons(
       validIcons,
@@ -336,6 +372,7 @@ export class Bg extends EventEmitter {
       label1Text,
       label2Text,
     );
+    console.log("[Bg.setIconsBase64] Complete");
   }
 
   /**

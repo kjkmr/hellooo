@@ -46,6 +46,7 @@ export default class CardContainer extends Container {
     label1Text?: string,
     label2Text?: string,
   ) {
+    console.log("[CardContainer.setIcons] Called with", icons.length, "icons");
     this.rotation = 15 * (Math.PI / 180);
     this.icons = icons;
     if (this.iconSpriteSheet) {
@@ -63,9 +64,12 @@ export default class CardContainer extends Container {
     this.iconSpriteSheet = iconSpriteSheet;
     this.qrSpriteSheet = qrSpriteSheet;
     this.handwritingsSpriteSheet = handwritingsSpriteSheet;
+    console.log("[CardContainer.setIcons] Spritesheets set, handwritings:", !!handwritingsSpriteSheet);
     if (label1Text) this.label1Text = label1Text;
     if (label2Text) this.label2Text = label2Text;
+    console.log("[CardContainer.setIcons] Calling _onResize");
     this._onResize();
+    console.log("[CardContainer.setIcons] Complete");
   }
 
   /**
@@ -80,11 +84,13 @@ export default class CardContainer extends Container {
    * 実際のリサイズ処理
    */
   protected _onResize = () => {
+    console.log("[CardContainer._onResize] Starting resize");
     const ww = window.innerWidth;
     const wh = window.innerHeight;
     const margin = 10;
     const areaRatio = isSpLayout() ? 1 : 0.5;
     const numColumns = Math.ceil((ww * areaRatio) / (CardBg.WIDTH + margin));
+    console.log("[CardContainer._onResize] Calculated columns:", numColumns, "current:", this.columns.length);
 
     while (this.columns.length != numColumns) {
       if (this.columns.length < numColumns) {
@@ -97,18 +103,22 @@ export default class CardContainer extends Container {
         column.x = this.columns.length * (CardBg.WIDTH + margin);
         this.container.addChild(column);
         this.columns.push(column);
+        console.log("[CardContainer._onResize] Added column", this.columns.length - 1);
       } else if (this.columns.length > numColumns) {
         const column = this.columns.pop()!;
         column.destroy();
         this.container.removeChild(column);
+        console.log("[CardContainer._onResize] Removed column");
       } else {
         break;
       }
       // break; // TODO
     }
 
+    console.log("[CardContainer._onResize] Setting icons for", this.columns.length, "columns");
     this.columns.forEach((column, i) => {
       if (this.icons.length && this.iconSpriteSheet && this.qrSpriteSheet) {
+        console.log("[CardContainer._onResize] Setting icons for column", i);
         column.setIcons(
           this.icons,
           this.iconSpriteSheet,
@@ -117,7 +127,14 @@ export default class CardContainer extends Container {
           this.label1Text,
           this.label2Text,
         );
+      } else {
+        console.log("[CardContainer._onResize] Skipping column", i, "- missing data", {
+          icons: this.icons.length,
+          iconSpriteSheet: !!this.iconSpriteSheet,
+          qrSpriteSheet: !!this.qrSpriteSheet,
+        });
       }
+      console.log("[CardContainer._onResize] Resetting column", i);
       column.reset(i);
     });
     this.x = window.innerWidth * (1 - areaRatio) + 60;
@@ -126,5 +143,6 @@ export default class CardContainer extends Container {
 
     this.y = window.innerHeight / 2;
     this.container.y = -this.y;
+    console.log("[CardContainer._onResize] Complete");
   };
 }
