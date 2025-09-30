@@ -75,5 +75,11 @@
     "url": "https://pbs.twimg.com/profile_images/1601255813615874048/2b8VHWue_400x400.jpg",
     "dataPath": "/images/sprites/icons/free__age.jpg",
     "qrPath": "/images/sprites/qr/free__age.png"
+  },
+  {
+    "account": "k28_mrn",
+    "url": "https://pbs.twimg.com/profile_images/1410150925998559234/EPzlG0ks_400x400.jpg",
+    "dataPath": "/images/sprites/icons/k28_mrn.jpg",
+    "qrPath": "/images/sprites/qr/k28_mrn.png"
   }
 ]

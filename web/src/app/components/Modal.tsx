@@ -276,7 +276,7 @@ export default function Modal(props: ModalProps) {
           <div>
             <label>SNS</label>
             <select ref={snsSelectRef}>
-              <option value="x">X (旧Twitter)</option>
+              <option value="x">X (Twitter)</option>
               <option value="instagram">Instagram</option>
             </select>
           </div>

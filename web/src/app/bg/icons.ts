@@ -14,12 +14,6 @@ export const icons: Icon[] = [
     qr: "",
   },
   {
-    account: "casestudy_info",
-    url: "",
-    data: "",
-    qr: "",
-  },
-  {
     account: "a_saya_108",
     url: "",
     data: "",
@@ -68,13 +62,13 @@ export const icons: Icon[] = [
     qr: "",
   },
   {
-    account: "MEFILAS_tamo2",
+    account: "free__age",
     url: "",
     data: "",
     qr: "",
   },
   {
-    account: "free__age",
+    account: "k28_mrn",
     url: "",
     data: "",
     qr: "",
