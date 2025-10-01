@@ -6,6 +6,7 @@ export const icons: Icon[] = [
     url: "",
     data: "",
     qr: "",
+    platform: "instagram",
   },
   {
     account: "WebMino",
@@ -18,18 +19,21 @@ export const icons: Icon[] = [
     url: "",
     data: "",
     qr: "",
+    platform: "instagram",
   },
   {
     account: "bxoxnx",
     url: "",
     data: "",
     qr: "",
+    platform: "instagram",
   },
   {
     account: "tomonorix0805",
     url: "",
     data: "",
     qr: "",
+    platform: "instagram",
   },
   {
     account: "oniguili",
