@@ -1,6 +1,8 @@
 import { Container, Sprite, Graphics, Texture } from "pixi.js";
 import CardBg from "./cardBg";
 import gsap from "gsap";
+import { COLORS } from "./constants";
+import { animateTint } from "../../utils";
 
 /**
  * カード全体を覆う手書き画像のコンテナ
@@ -41,6 +43,13 @@ export default class CardHandwriting extends Container {
     // 初期状態では非表示
     // this.visible = false;
     this.maskGraphics.scale.x = 0;
+
+    //
+    this.tint = 0x000000;
+  }
+
+  async over(delay: number = 0) {
+    await animateTint(this, COLORS.orange, 0x000000, delay);
   }
 
   /**

@@ -100,6 +100,7 @@ export class Copy extends Container {
   }
 
   async show() {
+    console.log("[Copy] show");
     if (
       !this.line1 ||
       !this.line2 ||
@@ -112,6 +113,7 @@ export class Copy extends Container {
     this.addChild(this.backsideContainer);
     this.button.visible = !isSpLayout() && isPcChrome();
     if (this.button.visible) this.addChild(this.button);
+    console.log("[Copy] show 1");
     const delay = 0.25;
     await Promise.all([
       this.line1.show(delay),
@@ -120,6 +122,7 @@ export class Copy extends Container {
       this.line4.show(delay + 0.75, 0.75),
       this.button.show(delay + 0.9, 0.75),
     ]);
+    console.log("[Copy] show 2");
   }
 
   async showThanks() {

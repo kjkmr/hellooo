@@ -1,8 +1,9 @@
 import { Container, Graphics, Text } from "pixi.js";
+import { COLORS } from "./constants";
 
 const colors = {
-  white: 0xffffff,
-  orange: 0xfd5100,
+  white: COLORS.white,
+  orange: COLORS.orange,
 };
 
 export default class CardBg extends Graphics {

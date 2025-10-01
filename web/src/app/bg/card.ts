@@ -99,7 +99,7 @@ export default class Card extends Container {
     this.addChild(this.backSide);
     this.visible = false;
     this.interactive = true;
-    this.cursor = "pointer";
+    // this.cursor = "pointer";
     this.flipAngle = this._flipAngle;
     this.flipPosition = this._flipPosition;
     this.on("mouseover", this.onMouseOver);
@@ -127,6 +127,15 @@ export default class Card extends Container {
         this.updateFlipAnimation,
       );
     }
+
+    // const delay = 0.1;
+    // this.icon.over(delay * Math.random());
+    // this.qr.over(delay * Math.random());
+    // this.accountLabel.over(delay * Math.random());
+    // this.account.over(delay * Math.random());
+    // this.label1.over(delay * Math.random());
+    // this.label2.over(delay * Math.random());
+    // this.handwriting?.over(delay * Math.random());
   };
 
   onMouseMove = (e: FederatedPointerEvent) => {
@@ -210,19 +219,15 @@ export default class Card extends Container {
    * @param delay
    */
   show(delay: number) {
-    console.log("[Card.show] Scheduling show for card", this.data?.account || "no-data", "with delay", delay);
     setTimeout(() => {
-      console.log("[Card.show] Showing card", this.data?.account || "no-data");
       this.visible = true;
       this.accountLabel.show();
       this.account.show();
       this.label1.show();
       this.label2.show();
-      console.log("[Card.show] Labels shown for card", this.data?.account || "no-data");
 
       // handwritingを0.5秒後に表示
       if (this.handwriting) {
-        console.log("[Card.show] Showing handwriting for card", this.data?.account);
         this.handwriting.show(0.75);
       }
 
@@ -246,7 +251,6 @@ export default class Card extends Container {
         ease: ease,
         overwrite: true,
       });
-      console.log("[Card.show] Animation started for card", this.data?.account || "no-data");
     }, delay * 1000);
   }
 }

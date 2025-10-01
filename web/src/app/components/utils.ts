@@ -6,9 +6,10 @@ export function isPcChrome() {
   if (navigator.userAgentData) {
     const brands = navigator.userAgentData.brands || [];
     const isChrome = brands.some((brand) => brand.brand.includes("Chrome"));
-    const isDesktop = navigator.userAgentData.platform === "Windows" || 
-                      navigator.userAgentData.platform === "macOS" || 
-                      navigator.userAgentData.platform === "Linux";
+    const isDesktop =
+      navigator.userAgentData.platform === "Windows" ||
+      navigator.userAgentData.platform === "macOS" ||
+      navigator.userAgentData.platform === "Linux";
     return isChrome && isDesktop;
   } else {
     const ua = window.navigator.userAgent.toLowerCase();
@@ -19,7 +20,6 @@ export function isPcChrome() {
     return isChrome && (isMacOS || isWindows || isLinux);
   }
 }
-
 
 /**
  * 再起的にファイルを取得する

@@ -1,6 +1,7 @@
 import { Container, FederatedPointerEvent, Sprite, Texture } from "pixi.js";
 import gsap from "gsap";
 import FlipSprite from "./flipSprite";
+import { COLORS } from "./constants";
 
 class ButtonLayout extends Container {
   bgSprite: Sprite;
@@ -71,16 +72,16 @@ export default class FlipSpriteButton extends FlipSprite {
       texture,
       textTexture,
       arrowTexture,
-      0xfd5100,
-      0xffffff,
+      COLORS.orange,
+      COLORS.white,
       resolution,
     );
     this.hover = new ButtonLayout(
       texture,
       textTexture,
       arrowTexture,
-      0xffffff,
-      0xfd5100,
+      COLORS.white,
+      COLORS.orange,
       resolution,
     );
     this.container.addChild(this.normal);
@@ -95,13 +96,15 @@ export default class FlipSpriteButton extends FlipSprite {
   };
 
   override async show(delay: number, duration: number = 1.25) {
-    super.show(delay, duration);
     gsap.to(this.hover, {
       alpha: 0,
       duration: 0.5,
       delay: duration + delay,
       ease: "cubic.inOut",
     });
+    console.log("[FlipSpriteButton.show] Scheduling show with delay", delay);
+    await super.show(delay, duration);
+    console.log("[FlipSpriteButton.show] Show complete");
   }
 
   protected override _onMouseOver(e: FederatedPointerEvent) {
