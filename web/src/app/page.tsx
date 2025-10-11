@@ -50,11 +50,18 @@ export default function Home() {
       } else if (event.data.type == "startGetIcons") {
         console.log("[Page.postMessage] startGetIcons");
       } else if (event.data.type == "endGetIcons") {
-        console.log("[Page.postMessage] endGetIcons - icons:", event.data.icons?.length);
+        console.log(
+          "[Page.postMessage] endGetIcons - icons:",
+          event.data.icons?.length,
+        );
       } else if (event.data.type == "startCreatePdf") {
         console.log("[Page.postMessage] startCreatePdf");
       } else if (event.data.type == "endCreatePdf") {
-        console.log("[Page.postMessage] endCreatePdf - received", event.data.icons?.length, "icons");
+        console.log(
+          "[Page.postMessage] endCreatePdf - received",
+          event.data.icons?.length,
+          "icons",
+        );
         console.log("[Page.postMessage] Icons data:", event.data.icons);
         setIsModalOpen(false);
         if (process.env.NODE_ENV === "development") {
@@ -140,7 +147,7 @@ export default function Home() {
           </div>
           {spLayout ? (
             <p className="main__sp-message">
-              このサービスはPCのブラウザで
+              このサービスはPC（Google Chrome）で
               <br />
               ご利用ください。
             </p>

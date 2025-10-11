@@ -81,5 +81,95 @@
     "url": "https://pbs.twimg.com/profile_images/1410150925998559234/EPzlG0ks_400x400.jpg",
     "dataPath": "/images/sprites/icons/k28_mrn.jpg",
     "qrPath": "/images/sprites/qr/k28_mrn.png"
+  },
+  {
+    "account": "manaweb_",
+    "url": "https://pbs.twimg.com/profile_images/1860852350564597760/VTli3od3_400x400.jpg",
+    "dataPath": "/images/sprites/icons/manaweb_.jpg",
+    "qrPath": "/images/sprites/qr/manaweb_.png"
+  },
+  {
+    "account": "MasayukiHosoo",
+    "url": "https://pbs.twimg.com/profile_images/1860851843758477313/ZEtphO_S_400x400.jpg",
+    "dataPath": "/images/sprites/icons/MasayukiHosoo.jpg",
+    "qrPath": "/images/sprites/qr/MasayukiHosoo.png"
+  },
+  {
+    "account": "yoneda_spicato",
+    "url": "https://pbs.twimg.com/profile_images/1860851499502596096/NGs8UTuJ_400x400.jpg",
+    "dataPath": "/images/sprites/icons/yoneda_spicato.jpg",
+    "qrPath": "/images/sprites/qr/yoneda_spicato.png"
+  },
+  {
+    "account": "B_BaaN_",
+    "url": "https://pbs.twimg.com/profile_images/1912813389287714816/8sTY5LQJ_400x400.jpg",
+    "dataPath": "/images/sprites/icons/B_BaaN_.jpg",
+    "qrPath": "/images/sprites/qr/B_BaaN_.png"
+  },
+  {
+    "account": "ohiroyan",
+    "url": "https://pbs.twimg.com/profile_images/1860851556037668864/ETIHQ11K_400x400.jpg",
+    "dataPath": "/images/sprites/icons/ohiroyan.jpg",
+    "qrPath": "/images/sprites/qr/ohiroyan.png"
+  },
+  {
+    "account": "spicato_ando",
+    "url": "https://pbs.twimg.com/profile_images/1860853523132678144/CtCrukeK_400x400.jpg",
+    "dataPath": "/images/sprites/icons/spicato_ando.jpg",
+    "qrPath": "/images/sprites/qr/spicato_ando.png"
+  },
+  {
+    "account": "spicato_kana",
+    "url": "https://pbs.twimg.com/profile_images/1860853500823158784/Sp0fIARg_400x400.jpg",
+    "dataPath": "/images/sprites/icons/spicato_kana.jpg",
+    "qrPath": "/images/sprites/qr/spicato_kana.png"
+  },
+  {
+    "account": "yoneda_spicato",
+    "url": "https://pbs.twimg.com/profile_images/1860851499502596096/NGs8UTuJ_400x400.jpg",
+    "dataPath": "/images/sprites/icons/yoneda_spicato.jpg",
+    "qrPath": "/images/sprites/qr/yoneda_spicato.png"
+  },
+  {
+    "account": "manaweb_",
+    "url": "https://pbs.twimg.com/profile_images/1860852350564597760/VTli3od3_400x400.jpg",
+    "dataPath": "/images/sprites/icons/manaweb_.jpg",
+    "qrPath": "/images/sprites/qr/manaweb_.png"
+  },
+  {
+    "account": "nabe_spicato",
+    "url": "https://pbs.twimg.com/profile_images/1860851485892042752/2L2_zcAr_400x400.jpg",
+    "dataPath": "/images/sprites/icons/nabe_spicato.jpg",
+    "qrPath": "/images/sprites/qr/nabe_spicato.png"
+  },
+  {
+    "account": "hoimi_spicato",
+    "url": "https://pbs.twimg.com/profile_images/1860852159807639552/Ki6FMtZQ_400x400.jpg",
+    "dataPath": "/images/sprites/icons/hoimi_spicato.jpg",
+    "qrPath": "/images/sprites/qr/hoimi_spicato.png"
+  },
+  {
+    "account": "MasayukiHosoo",
+    "url": "https://pbs.twimg.com/profile_images/1860851843758477313/ZEtphO_S_400x400.jpg",
+    "dataPath": "/images/sprites/icons/MasayukiHosoo.jpg",
+    "qrPath": "/images/sprites/qr/MasayukiHosoo.png"
+  },
+  {
+    "account": "daipdaip",
+    "url": "https://pbs.twimg.com/profile_images/1882278426624806912/vbzaWj8g_400x400.jpg",
+    "dataPath": "/images/sprites/icons/daipdaip.jpg",
+    "qrPath": "/images/sprites/qr/daipdaip.png"
+  },
+  {
+    "account": "maruyaman1984",
+    "url": "https://pbs.twimg.com/profile_images/1963409773766086656/0MegNvTH_400x400.jpg",
+    "dataPath": "/images/sprites/icons/maruyaman1984.jpg",
+    "qrPath": "/images/sprites/qr/maruyaman1984.png"
+  },
+  {
+    "account": "ryohei",
+    "url": "https://pbs.twimg.com/profile_images/1903103926477692928/2LqXXrmr_400x400.jpg",
+    "dataPath": "/images/sprites/icons/ryohei.jpg",
+    "qrPath": "/images/sprites/qr/ryohei.png"
   }
 ]

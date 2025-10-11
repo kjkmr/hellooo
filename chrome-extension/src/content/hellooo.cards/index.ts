@@ -93,7 +93,11 @@ export default class App {
 		});
 		window.postMessage({ type: 'endGetIcons' }, '*');
 		if (errorAccounts.length > 0) {
-			alert('以下のアカウントのアイコンが取得できませんでした。\n' + errorAccounts.join('\n'));
+			alert(
+				'以下のアカウントのアイコンが取得できませんでした。\n' +
+					errorAccounts.join('\n') +
+					'\nアカウント名とネットワーク接続を確認してください。'
+			);
 		}
 		return filtered;
 	}
