@@ -60,8 +60,8 @@ export class Copy extends Container {
     this.line4.position.y = 330;
     this.line4.position.x = 4;
     this.thanksLine2.position.y = 110;
-    this.thanksLine3.position.y = 220;
-    this.thanksLine4.position.y = 330;
+    this.thanksLine3.position.y = 210;
+    this.thanksLine4.position.y = 345;
     this.container.addChild(this.line1);
     this.container.addChild(this.line2);
     this.container.addChild(this.line3);
