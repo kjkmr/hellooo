@@ -54,19 +54,29 @@ export class Bg extends EventEmitter {
       })
       .then(async () => {
         console.log("[Bg] Application initialized successfully");
-        console.log("[Bg] Loading copy and cardContainer...");
-        await this.copy.load();
-        await this.cardContainer.load();
-        console.log("[Bg] Copy and cardContainer loaded");
-        this.app.canvas.classList.add("bg");
-        document.body.appendChild(this.app.canvas);
-        console.log("[Bg] Canvas appended to body");
-        this.app.stage.addChild(this.cardContainer);
-        this.app.stage.addChild(this.copy);
-        document.documentElement.classList.add("ready");
-        console.log("[Bg] Copy showing...");
-        await this.copy.show();
-        console.log("[Bg] Copy shown");
+
+        const copy = async () => {
+          console.log("[Bg] Loading copy...");
+          await this.copy.load();
+          this.app.canvas.classList.add("bg");
+          document.body.appendChild(this.app.canvas);
+          console.log("[Bg] Canvas appended to body");
+          this.app.stage.addChild(this.copy);
+          document.documentElement.classList.add("ready");
+          console.log("[Bg] Copy showing...");
+          await this.copy.show();
+          console.log("[Bg] Copy shown");
+        };
+
+        const card = async () => {
+          console.log("[Bg] Loading ardContainer...");
+          await this.cardContainer.load();
+          console.log("[Bg] Copy and cardContainer loaded");
+          this.app.stage.addChildAt(this.cardContainer, 0);
+        };
+
+        await Promise.all([copy(), card()]);
+
         // iconsの8件からランダムで5件削除
         const iconsEdited = [...icons];
         const numToRemove = Math.min(5, iconsEdited.length - 8);
