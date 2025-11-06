@@ -59,31 +59,6 @@ export const icons: Icon[] = [
     data: "",
     qr: "",
   },
-
-  // {
-  //   account: "design30m",
-  //   url: "",
-  //   data: "",
-  //   qr: "",
-  // },
-  // {
-  //   account: "soundkitchen",
-  //   url: "",
-  //   data: "",
-  //   qr: "",
-  // },
-  // {
-  //   account: "akihirofujiwara",
-  //   url: "",
-  //   data: "",
-  //   qr: "",
-  // },
-  // {
-  //   account: "ToteWebdesign",
-  //   url: "",
-  //   data: "",
-  //   qr: "",
-  // },
   {
     account: "free__age",
     url: "",
