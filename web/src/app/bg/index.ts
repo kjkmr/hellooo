@@ -67,6 +67,16 @@ export class Bg extends EventEmitter {
         console.log("[Bg] Copy showing...");
         await this.copy.show();
         console.log("[Bg] Copy shown");
+        // iconsの8件からランダムで5件削除
+        const iconsEdited = [...icons];
+        const numToRemove = Math.min(5, iconsEdited.length - 8);
+        for (let i = 0; i < numToRemove; i++) {
+          const indexToRemove = Math.floor(Math.random() * iconsEdited.length);
+          iconsEdited.splice(indexToRemove, 1);
+        }
+        console.log(
+          `[Bg] Icons prepared: ${iconsEdited.length} items (removed ${numToRemove})`,
+        );
 
         // デフォルトでスプライトシートを使用する場合
         try {
@@ -75,7 +85,10 @@ export class Bg extends EventEmitter {
           console.log(
             "[Bg] Spritesheet data loaded, setting icons with spritesheet",
           );
-          await this.setIconsWithSpritesheet(icons, spritesheetData.default);
+          await this.setIconsWithSpritesheet(
+            iconsEdited,
+            spritesheetData.default,
+          );
           console.log("[Bg] Icons set with spritesheet successfully");
         } catch (error) {
           console.error(
@@ -83,7 +96,7 @@ export class Bg extends EventEmitter {
             error,
           );
           // スプライトシートが無い場合は従来のBase64モードにフォールバック
-          await this.setIcons(icons);
+          await this.setIcons(iconsEdited);
         }
 
         console.log("[Bg] Initializing cardContainer");

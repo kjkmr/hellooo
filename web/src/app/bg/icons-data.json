@@ -12,12 +12,6 @@
     "qrPath": "/images/sprites/qr/WebMino.png"
   },
   {
-    "account": "casestudy_info",
-    "url": "https://pbs.twimg.com/profile_images/1536223584116707328/EfGvldQ2_400x400.jpg",
-    "dataPath": "/images/sprites/icons/casestudy_info.jpg",
-    "qrPath": "/images/sprites/qr/casestudy_info.png"
-  },
-  {
     "account": "a_saya_108",
     "url": "https://pbs.twimg.com/profile_images/1554846261412786177/6R8V0Aq3_400x400.jpg",
     "dataPath": "/images/sprites/icons/a_saya_108.jpg",
@@ -40,6 +34,24 @@
     "url": "https://pbs.twimg.com/profile_images/1839920728596197376/5JmzCCy9_400x400.jpg",
     "dataPath": "/images/sprites/icons/oniguili.jpg",
     "qrPath": "/images/sprites/qr/oniguili.png"
+  },
+  {
+    "account": "ryohei",
+    "url": "https://pbs.twimg.com/profile_images/1903103926477692928/2LqXXrmr_400x400.jpg",
+    "dataPath": "/images/sprites/icons/ryohei.jpg",
+    "qrPath": "/images/sprites/qr/ryohei.png"
+  },
+  {
+    "account": "kyono_s",
+    "url": "https://pbs.twimg.com/profile_images/1794025608026218496/jJh5UNjO_400x400.jpg",
+    "dataPath": "/images/sprites/icons/kyono_s.jpg",
+    "qrPath": "/images/sprites/qr/kyono_s.png"
+  },
+  {
+    "account": "thnlaura",
+    "url": "https://pbs.twimg.com/profile_images/1977295316568449024/2oWSS9lH_400x400.jpg",
+    "dataPath": "/images/sprites/icons/thnlaura.jpg",
+    "qrPath": "/images/sprites/qr/thnlaura.png"
   },
   {
     "account": "design30m",
@@ -171,5 +183,11 @@
     "url": "https://pbs.twimg.com/profile_images/1903103926477692928/2LqXXrmr_400x400.jpg",
     "dataPath": "/images/sprites/icons/ryohei.jpg",
     "qrPath": "/images/sprites/qr/ryohei.png"
+  },
+  {
+    "account": "nichi_iro",
+    "url": "https://pbs.twimg.com/profile_images/1860851460130680832/gCZqKVSM_400x400.jpg",
+    "dataPath": "/images/sprites/icons/nichi_iro.jpg",
+    "qrPath": "/images/sprites/qr/nichi_iro.png"
   }
 ]

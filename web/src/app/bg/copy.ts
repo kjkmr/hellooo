@@ -37,7 +37,9 @@ export class Copy extends Container {
     const l1 = await Assets.load("/images/copy-connect.png.webp");
     const l2 = await Assets.load("/images/copy-everyone.png.webp");
     const l3 = await Assets.load("/images/copy-icon.png.webp");
-    const l4 = await Assets.load("/images/copy-small.png.webp");
+    const l4 = await Assets.load(
+      `/images/copy-small${isSpLayout() ? "-sp" : ""}.png.webp`,
+    );
     const t1 = await Assets.load("/images/copy-thankyou1.png.webp");
     const t2 = await Assets.load("/images/copy-thankyou2.png.webp");
     const t3 = await Assets.load("/images/copy-thankyou3.png.webp");
@@ -55,10 +57,11 @@ export class Copy extends Container {
     this.thanksLine4 = new FlipSprite(t4, 96);
     this.line2.position.y = 111;
     this.line3.position.y = 220;
-    this.line4.position.y = 360;
+    this.line4.position.y = 330;
+    this.line4.position.x = 4;
     this.thanksLine2.position.y = 110;
     this.thanksLine3.position.y = 220;
-    this.thanksLine4.position.y = 360;
+    this.thanksLine4.position.y = 330;
     this.container.addChild(this.line1);
     this.container.addChild(this.line2);
     this.container.addChild(this.line3);

@@ -187,7 +187,7 @@ export default class Card extends Container {
       gsap.to(this, {
         flipPosition: 1,
         flipAngle: Math.PI * -0.75,
-        duration: 1.0,
+        duration: 0.75,
         ease,
         overwrite: true,
       });

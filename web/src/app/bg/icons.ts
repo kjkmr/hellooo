@@ -42,29 +42,48 @@ export const icons: Icon[] = [
     qr: "",
   },
   {
-    account: "design30m",
+    account: "ryohei",
     url: "",
     data: "",
     qr: "",
   },
   {
-    account: "soundkitchen",
+    account: "kyono_s",
     url: "",
     data: "",
     qr: "",
   },
   {
-    account: "akihirofujiwara",
+    account: "thnlaura",
     url: "",
     data: "",
     qr: "",
   },
-  {
-    account: "ToteWebdesign",
-    url: "",
-    data: "",
-    qr: "",
-  },
+
+  // {
+  //   account: "design30m",
+  //   url: "",
+  //   data: "",
+  //   qr: "",
+  // },
+  // {
+  //   account: "soundkitchen",
+  //   url: "",
+  //   data: "",
+  //   qr: "",
+  // },
+  // {
+  //   account: "akihirofujiwara",
+  //   url: "",
+  //   data: "",
+  //   qr: "",
+  // },
+  // {
+  //   account: "ToteWebdesign",
+  //   url: "",
+  //   data: "",
+  //   qr: "",
+  // },
   {
     account: "free__age",
     url: "",
@@ -73,12 +92,6 @@ export const icons: Icon[] = [
   },
   {
     account: "k28_mrn",
-    url: "",
-    data: "",
-    qr: "",
-  },
-  {
-    account: "ryohei",
     url: "",
     data: "",
     qr: "",
@@ -102,6 +115,12 @@ export const icons: Icon[] = [
     qr: "",
   },
   {
+    account: "ohiroyan",
+    url: "",
+    data: "",
+    qr: "",
+  },
+  {
     account: "manaweb_",
     url: "",
     data: "",
@@ -119,12 +138,7 @@ export const icons: Icon[] = [
     data: "",
     qr: "",
   },
-  {
-    account: "ohiroyan",
-    url: "",
-    data: "",
-    qr: "",
-  },
+
   {
     account: "spicato_ando",
     url: "",
@@ -145,6 +159,12 @@ export const icons: Icon[] = [
   },
   {
     account: "hoimi_spicato",
+    url: "",
+    data: "",
+    qr: "",
+  },
+  {
+    account: "nichi_iro",
     url: "",
     data: "",
     qr: "",

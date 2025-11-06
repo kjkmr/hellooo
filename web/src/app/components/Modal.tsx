@@ -304,6 +304,9 @@ export default function Modal(props: ModalProps) {
         <div className="modal__step3__submit">
           <p className="modal__text">
             1行に1アカウントのリストを入力するか、テキストファイルをドラッグ&ドロップしてください。
+            <span>
+              ※あらかじめ入力されているアカウントはシール生成をお試しいただくためのサンプルです
+            </span>
           </p>
           <button className="modal__button" onClick={handleCreate}>
             作成開始！
