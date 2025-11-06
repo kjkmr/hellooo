@@ -207,12 +207,12 @@ export default class FlipSprite extends Container {
         ease: ease,
         overwrite: true,
         onStart: () => {
-          console.log("flip animation started");
+          // console.log("flip animation started");
           this.backSide.visible = true;
           this.visible = true;
         },
         onComplete: () => {
-          console.log("flip animation complete");
+          // console.log("flip animation complete");
           resolve();
         },
       });
