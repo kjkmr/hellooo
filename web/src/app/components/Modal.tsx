@@ -5,6 +5,12 @@ import TemplateList from "./templateList";
 import "@/styles/_modal.scss";
 import { getAccountLists } from "./utils";
 import { platform } from "os";
+import {
+  trackExtensionCheck,
+  trackTemplateSelected,
+  trackCardCreationStarted,
+} from "../../utils/analytics";
+import { Templates } from "../../../../common";
 
 interface ModalProps {
   isOpen: boolean;
@@ -106,8 +112,11 @@ export default function Modal(props: ModalProps) {
 
     // 少し遅延させてから実行（DOMが完全に準備された後）
     const timer = setTimeout(() => {
-      setIsExtensionInstalled(checkIsExtensionInstalled());
-      if (checkIsExtensionInstalled() && step == 1) setStep(2);
+      const installed = checkIsExtensionInstalled();
+      setIsExtensionInstalled(installed);
+      // GAイベント送信
+      trackExtensionCheck(installed);
+      if (installed && step == 1) setStep(2);
     }, 100);
 
     window.postMessage({
@@ -177,10 +186,22 @@ export default function Modal(props: ModalProps) {
       return;
     }
 
+    const platform = snsSelectRef.current?.value || "x";
+    const accounts = accountText.split("\n").filter((acc) => acc.trim() !== "");
+    const hasCustomFields = field1Text !== "Company" || field2Text !== "Name";
+
+    // GAイベント送信
+    trackCardCreationStarted({
+      templateId,
+      platform,
+      accountCount: accounts.length,
+      hasCustomFields,
+    });
+
     window.postMessage({
       type: "create",
-      accounts: accountText.split("\n"),
-      platform: snsSelectRef.current?.value || "x",
+      accounts,
+      platform,
       field1Text,
       field2Text,
       selectedTemplateId: templateId,
@@ -199,6 +220,13 @@ export default function Modal(props: ModalProps) {
    * テンプレートの決定ボタンクリック時
    */
   const handleSetTemplate = () => {
+    if (templateId) {
+      const template = Templates.getById(templateId);
+      if (template) {
+        // GAイベント送信
+        trackTemplateSelected(template.id, template.maker, template.modelNumber);
+      }
+    }
     setStep(3);
   };
 
