@@ -103,29 +103,44 @@ export class Copy extends Container {
   }
 
   async show() {
-    console.log("[Copy] show");
-    if (
-      !this.line1 ||
-      !this.line2 ||
-      !this.line3 ||
-      !this.line4 ||
-      !this.button
-    )
-      return;
-    this.addChild(this.container);
-    this.addChild(this.backsideContainer);
-    this.button.visible = !isSpLayout() && isPcChrome();
-    if (this.button.visible) this.addChild(this.button);
-    console.log("[Copy] show 1");
-    const delay = 0.25;
-    await Promise.all([
-      this.line1.show(delay),
-      this.line2.show(delay + 0.225),
-      this.line3.show(delay + 0.45),
-      this.line4.show(delay + 0.75, 0.75),
-      this.button.show(delay + 0.9, 0.75),
-    ]);
-    console.log("[Copy] show 2");
+    return new Promise<void>(async (resolve) => {
+      console.log("[Copy] show");
+      if (
+        !this.line1 ||
+        !this.line2 ||
+        !this.line3 ||
+        !this.line4 ||
+        !this.button
+      ) {
+        console.warn("[Copy] show: missing elements");
+        resolve();
+        return;
+      }
+      this.addChild(this.container);
+      this.addChild(this.backsideContainer);
+      this.button.visible = !isSpLayout() && isPcChrome();
+      if (this.button.visible) this.addChild(this.button);
+      console.log("[Copy] show 1");
+      const delay = 0.25;
+      // timeout
+      let done = false;
+      setTimeout(() => {
+        if (done) return;
+        console.log("[Copy] show timeout");
+        resolve();
+      }, 3000);
+      //
+      await Promise.all([
+        this.line1.show(delay),
+        this.line2.show(delay + 0.225),
+        this.line3.show(delay + 0.45),
+        this.line4.show(delay + 0.75, 0.75),
+        this.button.show(delay + 0.9, 0.75),
+      ]);
+      done = true;
+      resolve();
+      console.log("[Copy] show 2");
+    });
   }
 
   async showThanks() {
